@@ -1,0 +1,57 @@
+{% extends 'frontend/base_dashboard.html.twig' %}
+
+{% block body_dashboard_outer_row %}
+    <div class="row mb-3 mt-3 pl-3">
+        <div class="col-md-6 pl-0 article-main">
+            {% include 'frontend/_modules/_article_item.html.twig' %}
+        </div>
+        <div class="col-md-3 pl-0 article-main">
+            {% include 'frontend/_modules/_article_item.html.twig' %}
+        </div>
+        <div class="col-md-3 pl-0 article-main">
+            {% include 'frontend/_modules/_article_item.html.twig' %}
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12 pl-4 mb-3">
+            <a href="{{ path('frontend_category_index') }}"><h3 class="category-title">Accessories</h3>
+            </a>
+        </div>
+    </div>
+    <div class="row mb-3 pl-3">
+        <div class="col-md-3 pl-0">
+            {% include 'frontend/_modules/_product_item.html.twig' %}
+        </div>
+        <div class="col-md-3 pl-0">
+            {% include 'frontend/_modules/_product_item.html.twig' %}
+        </div>
+        <div class="col-md-3 pl-0">
+            {% include 'frontend/_modules/_product_item.html.twig' %}
+        </div>
+        <div class="col-md-3 pl-0">
+            {% include 'frontend/_modules/_product_item.html.twig' %}
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12 pl-4 mb-3">
+            <a href="{{ path('frontend_category_index') }}"><h3 class="category-title">Tutorials</h3>
+            </a>
+        </div>
+    </div>
+    <div class="row mb-5 pl-3">
+        <div class="col-md-3 pl-0">
+            {% include 'frontend/_modules/_article_item.html.twig' %}
+        </div>
+        <div class="col-md-3 pl-0">
+            {% include 'frontend/_modules/_article_item.html.twig' %}
+        </div>
+        <div class="col-md-3 pl-0">
+            {% include 'frontend/_modules/_article_item.html.twig' %}
+        </div>
+        <div class="col-md-3 pl-0">
+            {% include 'frontend/_modules/_article_item.html.twig' %}
+        </div>
+    </div>
+    {% include 'frontend/_modules/_chat.html.twig' %}
+    {% include 'frontend/_modules/_modal_images.html.twig' %}
+{% endblock %}

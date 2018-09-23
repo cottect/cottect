@@ -1,0 +1,4 @@
+user.register.invalid_username: 'Tên đăng nhập bắt buộc phải là số điện thoại hoặc địa chỉ email.'
+user.register.invalid_phone_or_email: 'Tên đăng nhập bắt buộc phải là số điện thoại hoặc địa chỉ email.'
+user.register.email_already_exist: 'Địa chỉ email này đã được đăng ký'
+user.register.phone_number_already_exist: 'Số điện thoại này đã được đăng ký'

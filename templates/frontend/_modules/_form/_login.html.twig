@@ -1,0 +1,6 @@
+{{ form_start(form) }}
+    <h3>Login to Cottect</h3>
+    {{ form_row(form.username) }}
+    {{ form_row(form.password) }}
+    <button type="submit" class="btn btn-primary btn-lg btn-block">{{ 'action.login'|trans }}</button>
+{{ form_end(form) }}

@@ -1,0 +1,33 @@
+title.login: 'Đăng nhập'
+title.logout: 'Đăng xuất'
+title.register: 'Đăng ký tài khoản'
+title.create_new_account: 'Tạo tài khoản mới'
+label.male: Nam
+label.female: Nữ
+label.year: Năm
+label.month: Tháng
+label.day: Ngày
+label.username: 'Email hoặc số điện thoại'
+label.fullName: 'Tên đầy đủ'
+label.firstName: Họ
+label.lastName: Tên
+label.phone: 'Số điện thoại'
+label.country: 'Quốc gia'
+label.email: 'Địa chỉ email'
+label.password: 'Mật khẩu'
+label.plainPassword: 'Mật khẩu mới'
+label.birthday: 'Ngày sinh'
+label.repeatPassword: 'Nhập lại mật khẩu'
+label.emailOrPhone: 'Số điện thoại hoặc địa chỉ email'
+label.emailOrPhoneLess: 'Email hoặc điện thoại'
+label.forgotten_account: 'Quên tài khoản?'
+menu.homepage: 'Trang chủ'
+menu.admin: 'Quản trị'
+menu.logout: 'Đăng xuất'
+menu.search: 'Tìm kiếm'
+action.register: 'Tạo tài khoản'
+action.login: 'Đăng nhập'
+action.logout: 'Đăng xuất'
+email.subject.verify_code: 'Vui lòng xác thực địa chỉ email của bạn'
+email.body.verify: 'Xin chào firstName lastName,<br><br>Cám ơn bạn đã đăng ký tài khoản tại Cottect.<br><br>Email đăng nhập của bạn là: emailAddress<br><br>Mã xác thực: <strong>authenticationCode</strong><br><br>Chào mừng bạn đã gia nhập cộng đồng Cottect!'
+email.signal: '<br><br>— Nhóm phát triển Cottect'

@@ -1,0 +1,120 @@
+note: NOTE
+tip: TIP
+not_available: 'Not available'
+mit_license: 'MIT License'
+http_error.name: 'Error %status_code%'
+http_error.description: 'There was an unknown error (HTTP %status_code%) that prevented to complete your request.'
+http_error.suggestion: 'Try loading this page again in some minutes or <a href="%url%">go back to the homepage</a>.'
+http_error_403.description: 'You don''t have permission to access to this resource.'
+http_error_403.suggestion: 'Ask your manager or system administrator to grant you access to this resource.'
+http_error_404.description: 'We couldn''t find the page you requested.'
+http_error_404.suggestion: 'Check out any misspelling in the URL or <a href="%url%">go back to the homepage</a>.'
+http_error_500.description: 'There was an internal server error.'
+http_error_500.suggestion: 'Try loading this page again in some minutes or <a href="%url%">go back to the homepage</a>.'
+title.homepage: 'Welcome to the <strong>Cottect</strong> application'
+title.source_code: 'Source code used to render this page'
+title.controller_code: 'Frontend code'
+title.twig_template_code: 'Twig template code'
+title.login: 'Secure Sign in'
+title.register: 'Secure Register'
+title.post_list: 'Post List'
+title.edit_post: 'Edit post #%id%'
+title.add_comment: 'Add a comment'
+title.comment_error: 'There was an error publishing your comment'
+title.create_new_account: 'Create a new account'
+action.show: Show
+action.show_post: 'Show post'
+action.show_code: 'Show code'
+action.edit: Edit
+action.edit_post: 'Edit post'
+action.save: 'Save changes'
+action.delete_post: 'Delete post'
+action.edit_contents: 'Edit contents'
+delete_post_modal.title: 'Are you sure you want to delete this post?'
+delete_post_modal.body: 'This action cannot be undone.'
+label.male: Male
+label.female: Female
+label.year: Year
+label.month: Month
+label.day: Day
+label.delete_post: 'Delete post'
+label.cancel: Cancel
+action.create_post: 'Create a new post'
+label.create_post: 'Create post'
+label.save_and_create_new: 'Save and create new'
+action.back_to_list: 'Back to the post list'
+action.publish_comment: 'Publish comment'
+action.sign_in: 'Sign in'
+action.login: 'Login'
+action.logout: 'Logout'
+action.register: 'Create an account'
+action.verify: Verify
+action.browse_app: 'Browse application'
+action.browse_admin: 'Browse backend'
+label.title: Title
+label.author: Author
+label.author_email: 'Author email'
+label.username: 'Mobile number or email address'
+label.emailOrPhone: 'Mobile number or email address'
+label.emailOrPhoneLess: 'Email or Phone'
+label.fullName: 'Full name'
+label.first_name: 'First name'
+label.last_name: 'Last name'
+label.phone: Phone
+label.country: Country
+label.email: Email
+label.birthday: Birthday
+label.password: Password
+label.plainPassword: Password
+label.repeatPassword: 'Repeat password'
+label.role: Role
+label.content: Content
+label.summary: Summary
+label.published_at: 'Published at'
+label.tags: Tags
+label.actions: Actions
+label.verifyCode: 'Verify code'
+title.post_new: 'Post creation'
+label.forgotten_account: 'Forgotten account?'
+menu.toggle_nav: 'Toggle navigation'
+menu.choose_language: 'Choose language'
+menu.post_list: 'Post list'
+menu.back_to_blog: 'Back to blog'
+menu.homepage: Homepage
+menu.admin: Backend
+menu.logout: Logout
+menu.rss: 'Blog Posts RSS'
+menu.search: Search
+post.to_publish_a_comment: 'to publish a comment'
+post.num_comments: '%count% comment|%count% comments'
+post.commented_on: 'commented on'
+post.no_comments: 'Be the first to comment on this post.'
+post.no_posts_found: 'No posts found.'
+post.created_successfully: 'Post created successfully!'
+post.updated_successfully: 'Post updated successfully!'
+post.deleted_successfully: 'Post deleted successfully!'
+post.search_for: 'Search for...'
+post.search_no_results: 'No results found'
+notification.comment_created: 'Your post received a comment!'
+notification.comment_created.description: 'Your post "%title%" has received a new comment. You can read the comment by following <a href="%link%">this link</a>'
+help.app_description: 'This is a <strong>demo application</strong> built in the Symfony Framework to illustrate the recommended way of developing Symfony applications.'
+help.show_code: 'Click on this button to show the source code of the <strong>Frontend</strong> and <strong>template</strong> used to render this page.'
+help.browse_app: 'Browse the <strong>public section</strong> of the demo application.'
+help.browse_admin: 'Browse the <strong>admin backend</strong> of the demo application.'
+help.login_users: 'Try either of the following users'
+help.role_user: 'regular user'
+help.role_admin: administrator
+help.reload_fixtures: 'If these users don''t work, reload application fixtures by running this command from the terminal:'
+help.add_user: 'If you want to create new users, run this other command:'
+help.more_information: 'For more information, check out the <a href="https://symfony.com/doc">Symfony doc</a>.'
+help.checkpoint_heading_phone: '<strong>Enter the code from the SMS</strong>'
+help.checkpoint_heading_email: '<strong>Enter the code from the Email</strong>'
+help.checkpoint_body_phone: 'Let us know this mobile number belongs to you. Enter the code in the SMS sent to <strong>registerAccount</strong> (countryName).'
+help.checkpoint_body_email: 'Let us know this email belongs to you. Enter the code in the Email sent to <strong>registerAccount</strong>'
+rss.title: 'Cottect blog'
+rss.description: 'Most recent posts published on the Cottect blog'
+email.subject.verify_code: 'Please verify your email address'
+email.body.verify: 'Dear firstName lastName,<br><br>Thank you for signing up for Cottect.<br><br>Your Cottect ID is: emailAddress<br><br>The verify code is: <strong>authenticationCode</strong><br><br>Welcome to the Cottect community!'
+email.signal: '<br><br>— The Cottect Team'
+user.login.invalid_username: "The email address or phone number that you've entered doesn't match any account."
+user.login.invalid_password: "The password that you've entered is incorrect."

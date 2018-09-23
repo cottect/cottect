@@ -1,0 +1,34 @@
+{% extends 'frontend/base_dashboard.html.twig' %}
+
+{% block body_main_dashboard %}
+    <div class="row pl-2 pr-2">
+        <div class="col-md-12 mb-3 pr-2 pl-2">
+            {% include 'frontend/_modules/_article_item.html.twig' %}
+        </div>
+    </div>
+    <div class="row pl-2 pr-2">
+        <div class="col-md-6 mb-3 pl-2 pr-2">
+            {% include 'frontend/_modules/_article_item.html.twig' %}
+        </div>
+        <div class="col-md-6 mb-3 pl-2 pr-2">
+            {% include 'frontend/_modules/_article_item.html.twig' %}
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12 pl-4 mb-3">
+            <a href="{{ path('frontend_category_index') }}"><h3 class="category-title">New posts</h3>
+            </a>
+        </div>
+    </div>
+    {% for i in 0..9 %}
+        <div class="row mb-3">
+            <div class="col-md-12">
+                {% include 'frontend/_modules/_article_item_horizontal.html.twig' %}
+            </div>
+        </div>
+    {% endfor %}
+    <div class="row ">
+        {% include 'frontend/_modules/_paginator.html.twig' %}
+    </div>
+{% endblock %}
+

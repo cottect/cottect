@@ -1,0 +1,11 @@
+.form-group.has-error .help-block .list-unstyled li {
+  color: #dc3545;
+}
+
+.form-group.has-error input {
+  border: 1px solid #dc3545;
+}
+
+.form-group.has-error .help-block .list-unstyled {
+  margin-top: 0.5rem;
+}

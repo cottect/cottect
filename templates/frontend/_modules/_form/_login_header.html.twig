@@ -1,0 +1,17 @@
+<form class="form-inline mb-2" method="post" action="{{ path('frontend_user_login') }}">
+    <div class="form-group">
+        <input type="text" id="user_login_frontend_form_username"
+               name="user_login_frontend_form[username]" required="required"
+               placeholder="Mobile or email"
+               class="form-control mb-2 mr-sm-2 mb-sm-0 form-control">
+    </div>
+    <div class="form-group">
+        <input type="password" id="user_login_frontend_form_password"
+                                   name="user_login_frontend_form[password]" required="required" placeholder="Password"
+                                   class="form-control mb-2 mr-sm-2 mb-sm-0 form-control">
+    </div>
+    <input type="hidden" id="login_token" name="user_login_frontend_form[_token]"
+           value="{{ csrf_token('user_login_frontend_form') }}">
+    <button type="submit"
+            class="btn btn-outline-light my-2 my-sm-0">{{ 'action.login'|trans }}</button>
+</form>

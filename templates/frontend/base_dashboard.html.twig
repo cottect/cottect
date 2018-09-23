@@ -1,0 +1,79 @@
+{% extends 'frontend/base.html.twig' %}
+
+{% block body_id 'dashboardBody' %}
+{% block header %}
+    {% include 'frontend/_modules/_header-dashboard.html.twig' %}
+{% endblock %}
+
+{% block body %}
+    {% block body_nav_utils %}
+        <div id="nav-utils" class="bg-light row m-0">
+            <div class="col-md-12 p-0">
+                <nav class="nav nav-pills flex-column flex-sm-row bg-light pl-3 pr-3 pb-2 pt-2">
+                    <a class="text-sm-center nav-link active" href="{{ path('frontend_dashboard_index') }}">Hot</a>
+                    <a class="text-sm-center nav-link" href="{{ path('frontend_dashboard_index') }}">New</a>
+                    <a class="text-sm-center nav-link" href="{{ path('frontend_dashboard_index') }}">Rising</a>
+                    <a class="text-sm-center nav-link disabled" href="#">Wiki</a>
+                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                        <div class="navbar-nav mr-auto">
+                            <form class="form-inline">
+                                <input class="form-control mr-sm-2" type="search" placeholder="Search"
+                                       aria-label="Search">
+                                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
+                            </form>
+                        </div>
+                    </div>
+                </nav>
+            </div>
+        </div>
+    {% endblock %}
+    <div id="dashboard-main" class="container-fluid pl-0">
+        {% block main_dashboard %}
+            {% block before_body_dashboard %}
+            {% endblock %}
+            <div class="row mr-0 ml-0">
+                <div class="col-md-10 pr-0">
+                    {% block body_dashboard_outer_row %}
+                    <div class="row">
+                        {% block body_dashboard %}
+                            <div class="col-md-3 mb-5 mt-3">
+                                <div class="card mb-3">
+                                    {% include 'frontend/_modules/_profile.html.twig' %}
+                                </div>
+                                <div class="card">
+                                    {% include 'frontend/_modules/_quote.html.twig' %}
+                                </div>
+                            </div>
+                            <div class="col-md-9 pl-0 mb-5 mt-3 main">
+                                {% block body_main_dashboard %}
+                                    {% include 'frontend/_modules/_cover.html.twig' %}
+                                    {% block body_data_dashboard %}
+                                    {% endblock %}
+                                {% endblock %}
+                            </div>
+                        {% endblock %}
+                    </div>
+                    {% endblock %}
+                </div>
+                <div class="col-md-2">
+                    {% include 'frontend/_modules/_chat.html.twig' %}
+                    {% include 'frontend/_modules/_modal_images.html.twig' %}
+                </div>
+            </div>
+        {% endblock %}
+    </div>
+{% endblock %}
+
+{% block footer %}
+    {% include 'frontend/_modules/_footer-dashboard.html.twig' %}
+{% endblock %}
+
+{% block javascripts %}
+    <!-- development version, includes helpful console warnings -->
+    <script src="{{ asset('build/manifest.js') }}"></script>
+    <script src="{{ asset('build/js/common.js') }}"></script>
+    <script src="{{ asset('build/js/app.js') }}"></script>
+    <script src="{{ asset('build/js/chat-box.js') }}"></script>
+    {% block javascripts_add %}
+    {% endblock %}
+{% endblock %}

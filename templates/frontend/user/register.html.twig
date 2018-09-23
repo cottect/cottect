@@ -1,0 +1,28 @@
+{% extends 'frontend/base.html.twig' %}
+
+{% block body_id 'register' %}
+
+{% block body %}
+    <div id="globalContainer" class="jumbotron sign-up">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card">
+                        <div class="card-body">
+                            {% include 'frontend/_modules/_form/_register.html.twig' %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block sidebar %}
+    {{ parent() }}
+{% endblock %}
+
+{% block javascripts %}
+    {{ parent() }}
+    <script src="{{ asset('build/js/register.js') }}"></script>
+{% endblock %}

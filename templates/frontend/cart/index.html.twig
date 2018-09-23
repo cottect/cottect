@@ -1,0 +1,99 @@
+{% extends 'frontend/base_dashboard.html.twig' %}
+
+{% block body_dashboard %}
+    <div class="col-md-12 mb-5 mt-2 main">
+        <div class="card">
+            <div class="card-header">
+                Shopping cart
+            </div>
+            <div class="card-body">
+                <form method="post" action="#">
+                    <div class="table-responsive">
+                        <table class="table">
+                            <thead>
+                            <tr>
+                                <th colspan="2">Product</th>
+                                <th>Quantity</th>
+                                <th>Unit price</th>
+                                <th>Discount</th>
+                                <th colspan="2">Total</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            <tr>
+                                <td>
+                                    <a href="{{ path('frontend_product_index') }}">
+                                        <img src="https://cottect.com/wp-content/themes/cottect/assets/images/iphonex.jpg"
+                                             alt="White Blouse Armani" width="50">
+                                    </a>
+                                </td>
+                                <td><a href="{{ path('frontend_product_index') }}">White Blouse Armani</a></td>
+                                <td><input type="number" value="2" class="form-control"></td>
+                                <td>$123.00</td>
+                                <td>$0.00</td>
+                                <td>$246.00</td>
+                                <td><a href="#"><i class="fa fa-trash-o"></i></a></td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <a href="{{ path('frontend_product_index') }}">
+                                        <img src="https://cottect.com/wp-content/themes/cottect/assets/images/iphonex.jpg"
+                                             alt="White Blouse Armani" width="50">
+                                    </a>
+                                </td>
+                                <td><a href="{{ path('frontend_product_index') }}">White Blouse Armani</a></td>
+                                <td><input type="number" value="2" class="form-control"></td>
+                                <td>$123.00</td>
+                                <td>$0.00</td>
+                                <td>$246.00</td>
+                                <td><a href="#"><i class="fa fa-trash-o"></i></a></td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <a href="{{ path('frontend_product_index') }}">
+                                        <img src="https://cottect.com/wp-content/themes/cottect/assets/images/iphonex.jpg"
+                                             alt="White Blouse Armani" width="50">
+                                    </a>
+                                </td>
+                                <td><a href="{{ path('frontend_product_index') }}">White Blouse Armani</a></td>
+                                <td><input type="number" value="2" class="form-control"></td>
+                                <td>$123.00</td>
+                                <td>$0.00</td>
+                                <td>$246.00</td>
+                                <td><a href="#"><i class="fa fa-trash-o"></i></a></td>
+                            </tr>
+                            <tr>
+                                <td>
+                                    <a href="{{ path('frontend_product_index') }}">
+                                        <img src="https://cottect.com/wp-content/themes/cottect/assets/images/iphonex.jpg"
+                                             alt="White Blouse Armani" width="50">
+                                    </a>
+                                </td>
+                                <td><a href="{{ path('frontend_product_index') }}">White Blouse Armani</a></td>
+                                <td><input type="number" value="2" class="form-control"></td>
+                                <td>$123.00</td>
+                                <td>$0.00</td>
+                                <td>$246.00</td>
+                                <td><a href="#"><i class="fa fa-trash-o"></i></a></td>
+                            </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <div class="box-footer">
+                        <div class="pull-left">
+                            <a href="{{ path('frontend_category_index') }}" class="btn btn-default">
+                                <i class="fa fa-chevron-left"></i>Continue shopping
+                            </a>
+                        </div>
+                        <div class="pull-right">
+                            <button class="btn btn-default"><i class="fa fa-refresh"></i> Update cart</button>
+                            <a href="{{ path('frontend_checkout_index') }}" class="btn btn-primary">Proceed to checkout <i
+                                        class="fa fa-chevron-right"></i>
+                            </a>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+{% endblock %}

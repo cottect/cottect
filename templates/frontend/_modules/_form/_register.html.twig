@@ -1,0 +1,29 @@
+{{ form_start(form) }}
+<h2>{{ 'title.create_new_account'|trans }}</h2>
+<p>Whether you sell online, on social media, in store, or out of the trunk of your car,
+    Cottect has you covered.</p>
+<div class="form-row">
+    <div class="col">
+        {{ form_row(form.first_name) }}
+    </div>
+    <div class="col">
+        {{ form_row(form.last_name) }}
+    </div>
+</div>
+{{ form_row(form.username) }}
+{{ form_row(form.password) }}
+{{ form_row(form.birthday) }}
+{{ form_row(form.gender) }}
+<div class="form-group">
+    <small class="form-text text-muted">By clicking Create
+        an account, you agree to our <a href="#" id="terms-link" target="_blank"
+                                        rel="nofollow">Terms</a> and
+        confirm that you have read our <a href="#" id="privacy-link" target="_blank"
+                                          rel="nofollow">Data Policy</a>,
+        including our <a href="#" id="cookie-use-link" target="_blank" rel="nofollow">Cookie
+            Use Policy</a>. You may receive SMS
+        message notifications from Cottect and can opt out at any time.
+    </small>
+</div>
+<button type="submit" class="btn btn-primary">{{ 'action.register'|trans }}</button>
+{{ form_end(form) }}

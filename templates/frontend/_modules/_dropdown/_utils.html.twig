@@ -1,0 +1,22 @@
+<button class="btn btn-link btn-item" type="button" data-toggle="dropdown" aria-haspopup="true"
+        aria-expanded="false">
+    <i class="fa fa-caret-down" aria-hidden="true"></i>
+</button>
+<div class="dropdown-menu dropdown-menu-right headDropdown utils" aria-labelledby="dropdownMenuButton">
+    <div class="beeperNub"><i class="fa fa-caret-up" aria-hidden="true"></i></div>
+    <div class="list-group">
+        <a href="#" class="list-group-item flex-column align-items-start">
+            Create page
+        </a>
+        <a href="#" class="list-group-item flex-column align-items-start">
+            Manage page
+        </a>
+
+        <a href="#" class="list-group-item flex-column align-items-start">
+            Settings
+        </a>
+        <a href="#" class="list-group-item flex-column align-items-start">
+            {% include 'frontend/_modules/_form/_logout.html.twig' %}
+        </a>
+    </div>
+</div>

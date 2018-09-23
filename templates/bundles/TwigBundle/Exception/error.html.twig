@@ -1,0 +1,22 @@
+{% extends 'frontend/base.html.twig' %}
+
+{% block body_id 'error' %}
+
+{% block main %}
+    <div id="globalContainer" class="jumbotron error-404">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <h1 class="text-danger">{{ 'http_error.name'|trans({ '%status_code%': status_code }) }}</h1>
+
+                    <p class="lead">
+                        {{ 'http_error.description'|trans({ '%status_code%': status_code }) }}
+                    </p>
+                    <p>
+                        {{ 'http_error.suggestion'|trans({ '%url%': path('blog_index') })|raw }}
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

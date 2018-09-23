@@ -1,0 +1,25 @@
+version: "2"
+services:
+    cottect:
+        container_name: core
+        build: .
+        ports:
+            - "8000:8000"
+        links:
+            - mariadb
+        volumes:
+            - ./:/var/www/html
+            - ./services/logs/nginx:/var/log/nginx
+            - ./services/logs/supervisor:/var/log/supervisor
+            - ./services/nginx/conf.d:/etc/nginx/conf.d
+            - ./services/nginx/pwd:/etc/nginx/pwd
+            - ./services/supervisor/conf.d:/etc/supervisor/conf.d
+    mariadb:
+        container_name: mariadb
+        image: mariadb:latest
+        ports:
+            - "3306:3306"
+        environment:
+            - MYSQL_ROOT_PASSWORD=UPI8lbIAMVoOFpJH3KmY4gJnDx
+        volumes:
+            - ./services/mariadb:/var/lib/mysql

@@ -1,0 +1,34 @@
+{% extends 'frontend/base_dashboard.html.twig' %}
+{% block body %}
+    <div id="article-editor">
+        <div class="col-md-8 mb-5 mt-0 create-page-main pt-5">
+            <form>
+                <div class="card">
+                    <div class="card-header">
+                        <div id="btn-upload-header-image" class="article-image-header text-center">
+                            <span class="text-description"><i class="fa fa-file-image-o" aria-hidden="true"></i> Drag or click to add a photo</span>
+                            <img id="image-header" src="#" style="display: none">
+                        </div>
+                        <input type="file" id="image-header-input" style="display:none" accept="image/*"/>
+                    </div>
+
+                    <div class="card-body">
+                        <div class="article-title form-group">
+                            <input type="text" class="form-control" placeholder="Title" spellcheck="false">
+                        </div>
+                        <ul class="list-inline">
+                            <li class="list-inline-item">
+                                <i class="fa fa-calendar"></i> 2017-12-25
+                            </li>
+                        </ul>
+                        <div class="editable"></div>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+{% endblock %}
+
+{% block javascripts_add %}
+    <script src="{{ asset('build/js/textEditor.js') }}"></script>
+{% endblock %}

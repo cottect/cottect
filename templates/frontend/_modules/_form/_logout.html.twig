@@ -1,0 +1,6 @@
+<form method="post" action="{{ path('frontend_user_logout') }}">
+    <input type="hidden" id="logout_token" name="user_logout_frontend_form[_token]"
+           value="{{ csrf_token('user_logout_frontend_form') }}">
+    <button type="submit"
+            class="btn btn-link btn-logout">{{ 'action.logout'|trans }}</button>
+</form>

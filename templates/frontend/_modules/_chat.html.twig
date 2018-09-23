@@ -1,0 +1,37 @@
+<div id="chat-box" class="col-md-2">
+    <div class="list-group">
+        {% for i in 0..9 %}
+            <a class="list-group-item d-flex justify-content-between align-items-center list-group-item-action p-2"
+               href="javascript:void(0);">
+                <div class="group-avatar">
+                    <div class="avatar rounded float-sm-left">
+                        <img src="https://cottect.com/wp-content/themes/cottect/assets/images/avatar.jpg">
+                    </div>
+                    <div class="name float-sm-left pt-1 pl-2">Bang Dinh Nhat</div>
+                </div>
+                <span class="badge badge-primary badge-pill">{{ random(20) }}</span>
+            </a>
+        {% endfor %}
+        <a class="list-group-item d-flex justify-content-between align-items-center list-group-item-action p-2"
+           href="javascript:void(0);">
+            <div class="group-avatar">
+                <div class="avatar rounded float-sm-left">
+                    <img src="https://cottect.com/wp-content/themes/cottect/assets/images/avatar.jpg">
+                </div>
+                <div class="name float-sm-left pt-1 pl-2">Bang Dinh Nhat</div>
+            </div>
+            <small>{{ random(10) }}m</small>
+        </a>
+        <a class="list-group-item d-flex justify-content-between align-items-center list-group-item-action p-2"
+           href="javascript:void(0);">
+            <div class="group-avatar">
+                <div class="avatar rounded float-sm-left">
+                    <img src="https://cottect.com/wp-content/themes/cottect/assets/images/avatar.jpg">
+                </div>
+                <div class="name float-sm-left pt-1 pl-2">Bang Dinh Nhat</div>
+            </div>
+            <i class="fa fa-circle text-success" aria-hidden="true"></i>
+        </a>
+    </div>
+    {% include 'frontend/_modules/_chat_box.html.twig' %}
+</div>

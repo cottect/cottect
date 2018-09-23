@@ -1,0 +1,48 @@
+<header>
+    <nav id="dashboardHeader" class="navbar navbar-expand-lg navbar-dark bg-primary fixed-top">
+        <div class="container-fluid pl-0">
+            <a class="navbar-brand " href="/">Cottect</a>
+            <button class="navbar-toggler navbar-toggler-right " type="button" data-toggle="collapse"
+                    data-target="#navbarsExampleDefault" aria-controls="navbarsExampleDefault" aria-expanded="false"
+                    aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse justify-content-between" id="navbarsExampleDefault">
+                {% include 'frontend/_modules/_search_input.html.twig' %}
+                <div class="row tool-groups">
+                    <div class="mr-3 avatar-group">
+                        <a href="{{ path('frontend_page_index') }}" class="btn-link btn-item">
+                                <span class="nav-avatar rounded-circle"><img
+                                            src="https://cottect.com/wp-content/themes/cottect/assets/images/avatar.jpg"></span>
+                            <span class="nav-name">Bang Dinh Nhat</span>
+                        </a>
+                    </div>
+                    <div class="vertical-line mr-3 avatar-group"></div>
+                    <div class="mr-3 home-group">
+                        <a href="{{ path('frontend_dashboard_index') }}" class="btn-link btn-link-home btn-item">Home</a>
+                    </div>
+                    <div class="vertical-line mr-1 home-group"></div>
+                    <div class="dropdown mr-1">
+                        {% include 'frontend/_modules/_dropdown/_friend_requests.html.twig' %}
+                    </div>
+                    <div class="dropdown mr-1">
+                        {% include 'frontend/_modules/_dropdown/_messages.html.twig' %}
+                    </div>
+                    <div class="dropdown mr-1">
+                        {% include 'frontend/_modules/_dropdown/_notification.html.twig' %}
+                    </div>
+                    <div class="dropdown mr-1">
+                        {% include 'frontend/_modules/_dropdown/_cart.html.twig' %}
+                    </div>
+                    <div class="vertical-line mr-1"></div>
+                    <div class="dropdown mr-1">
+                        {% include 'frontend/_modules/_dropdown/_help.html.twig' %}
+                    </div>
+                    <div class="dropdown">
+                        {% include 'frontend/_modules/_dropdown/_utils.html.twig' %}
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+</header>

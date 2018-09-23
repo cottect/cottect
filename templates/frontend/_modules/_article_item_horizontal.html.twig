@@ -1,0 +1,32 @@
+<div class="articleItemHorizontal card">
+    <div class="card-body">
+        <div class="row">
+            <div class="col-md-3">
+                <a class="article-image" href="{{ path('frontend_article_detail') }}">
+                    <span class="helper"></span>
+                    <img src="{{ list_images_url[4] }}"
+                         class="img-fluid img-article-horizontal ard-img-top wp-post-image">
+                </a>
+            </div>
+            <div class="col-md-8">
+                <a href="{{ path('frontend_article_detail') }}">
+                    <h5 class="card-title">A Former Anonymous Hacker’s Search for...</h5>
+                </a>
+                <ul class="list-inline">
+                    <li class="list-inline-item">
+                        <i class="fa fa-calendar"></i> 2017-12-25
+                    </li>
+                    <li class="list-inline-item">
+                        <i class="fa fa-eye"></i> {{ random(1000) }}
+                    </li>
+                    <li class="list-inline-item">
+                        <i class="fa fa-comment"></i> {{ random(100) }}
+                    </li>
+                </ul>
+                <p class="card-text">After cooperating with the government, Hector Monsegur avoided a lengthy prison
+                    sentence.
+                    Today, he leads a successful cybersecurity…</p>
+            </div>
+        </div>
+    </div>
+</div>

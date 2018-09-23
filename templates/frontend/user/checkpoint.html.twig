@@ -1,0 +1,35 @@
+{% extends 'frontend/base.html.twig' %}
+
+{% block body_id 'checkpoint' %}
+
+{% block header %}
+    <header>
+        <nav id="globalHeader" class="navbar navbar-expand-lg navbar-dark bg-primary">
+            <div class="container">
+                <a class="navbar-brand " href="/">Cottect</a>
+                <a class="btn  btn-outline-light" href="{{ path('frontend_user_register') }}">Logout</a>
+            </div>
+        </nav>
+    </header>
+{% endblock %}
+
+{% block body %}
+    <div id="globalContainer" class="jumbotron checkpoint">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card">
+                        <div class="card-body">
+                            {% if registerType == 'phone' %}
+                                {% include 'frontend/_modules/_form/_checkpoint_phone.html.twig' %}
+                            {% else %}
+                                {% include 'frontend/_modules/_form/_checkpoint_email.html.twig' %}
+                            {% endif %}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+{% block footer_detail_authenticated %}{% endblock %}

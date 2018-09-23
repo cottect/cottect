@@ -1,0 +1,153 @@
+{% extends 'frontend/base_dashboard.html.twig' %}
+
+{% block body_data_dashboard %}
+    <div class="row">
+        <div class="col-md-12">
+            {% include 'frontend/_modules/_breadcrumb.html.twig' %}
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12">
+            <div class="card mb-3">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-6 pr-2">
+                            <img src="https://cottect.com/wp-content/themes/cottect/assets/images/iphonex.jpg"
+                                 class="img-fluid mb-3">
+                        </div>
+                        <div class="col-md-6 pl-2">
+                            <a href="#"><h4 class="card-title">iPhone X</h4></a>
+                            <h6 class="card-subtitle mb-2 text-muted">$924.99</h6>
+                            <p class="card-text">The table below provides detailed information about the
+                                Apple iPhone 6 Unlocked Smartphone, 16 GB (Gold) (Certified Refurbished)
+                                compatibility with the corresponding carrier network.
+                            </p>
+                            <p>
+                                <a href="{{ path('frontend_cart_index') }}" class="btn btn-warning">
+                                    <i class="fa fa-cart-plus" aria-hidden="true"></i>
+                                    Add to Cart
+                                </a>
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12 pl-4 mb-2">
+                    <h5 class="category-title">Product description</h5>
+                </div>
+            </div>
+            <div class="card mb-3">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <table class="table table-bordered">
+                                <tbody>
+                                <tr>
+                                    <td scope="row" class="font-weight-bold">Product Dimensions</td>
+                                    <td>4.9 x 2.3 x 0.3 inches</td>
+                                </tr>
+                                <tr>
+                                    <td scope="row" class="font-weight-bold">Item Weight</td>
+                                    <td>4 ounces</td>
+                                </tr>
+                                <tr>
+                                    <td scope="row" class="font-weight-bold">Shipping Weight</td>
+                                    <td>12.8 ounces</td>
+                                </tr>
+                                <tr>
+                                    <td scope="row" class="font-weight-bold">Manufacturer</td>
+                                    <td>B00FWVEVN4</td>
+                                </tr>
+                                <tr>
+                                    <td scope="row" class="font-weight-bold">Item model number</td>
+                                    <td>1631-33 / SOL-HP1631RD</td>
+                                </tr>
+                                <tr>
+                                    <td scope="row" class="font-weight-bold">ASIN</td>
+                                    <td>B00FWVEVN4</td>
+                                </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12 pl-4 mb-2">
+                    <h5 class="category-title">Warranty &amp; Support</h5>
+                </div>
+            </div>
+            <div class="card mb-3">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <p><strong>Product Warranty:</strong> For warranty information about this product, <a
+                                        href="#"> please click here</a></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-md-12 pl-4 mb-2">
+                    <h5 class="category-title">Customer questions &amp; answers</h5>
+                </div>
+            </div>
+            <div class="card mb-3">
+                <div class="card-body">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <ul class="list-group">
+                                <li class="list-group-item">
+                                    <table>
+                                        <tbody>
+                                        <tr>
+                                            <td class="vertical-top"><strong>Question:</strong></td>
+                                            <td class="pb-2 font-weight-bold">Why is the price in amazon.com (around
+                                                $580)
+                                                more than in
+                                                Apple store ($499)? Though both are sim-free?
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="vertical-top"><strong>Answer:</strong></td>
+                                            <td>Because they are screwing you. And no there aren't any extra
+                                                charges either. Apple charges $399 for the 16GB and $499 for
+                                                the 64GB which both come with a 1 year warranty. Of course
+                                                you can get an extended warranty for another $99 but you
+                                                don't have to.
+                                            </td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </li>
+                                <li class="list-group-item">
+                                    <table>
+                                        <tbody>
+                                        <tr>
+                                            <td class="vertical-top"><strong>Question:</strong></td>
+                                            <td class="pb-2 font-weight-bold">What model you are selling here? which
+                                                bands
+                                                will it work on 2g 3g 4g?
+                                            </td>
+                                        </tr>
+                                        <tr>
+                                            <td class="vertical-top"><strong>Answer:</strong></td>
+                                            <td>A1662. LTE bands 1, 2, 3, 4, 5, 8, 12, 13, 17, 18, 19, 20,
+                                                25, 26, and 29, CDMA EV‑DO Rev. A (800, 1700/2100, 1900,
+                                                2100 MHz)
+                                                UMTS/HSPA+/DC‑HSDPA (850, 900, 1700/2100, 1900, 2100 MHz)
+                                            </td>
+                                        </tr>
+                                        </tbody>
+                                    </table>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    {% include 'frontend/_modules/_product_review.html.twig' %}
+{% endblock %}

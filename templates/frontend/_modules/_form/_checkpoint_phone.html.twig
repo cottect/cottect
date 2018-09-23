@@ -1,0 +1,10 @@
+<h5 class="card-title">{{ 'help.checkpoint_heading_phone'|trans|raw }}</h5>
+<p class="card-text">
+    {{ 'help.checkpoint_body_phone'|trans({'registerAccount': registerAccount, 'countryName': countryName})|raw }}
+</p>
+{{ form_start(form) }}
+        {{ form_row(form.verifyCode) }}
+<button type="submit" class="btn btn-primary">
+    <i class="fa fa-sign-in" aria-hidden="true"></i> {{ 'action.verify'|trans }}
+</button>
+{{ form_end(form) }}

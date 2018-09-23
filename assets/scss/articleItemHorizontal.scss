@@ -1,0 +1,14 @@
+.articleItemHorizontal {
+  .article-image{
+    white-space: nowrap;
+    .helper{
+      vertical-align: middle;
+      display: inline-block;
+      height: 100%;
+    }
+    img.ard-img-top.wp-post-image {
+      vertical-align: middle;
+      display: inline-block;
+    }
+  }
+}

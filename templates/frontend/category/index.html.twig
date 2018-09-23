@@ -1,0 +1,26 @@
+{% extends 'frontend/base_dashboard.html.twig' %}
+
+{% block body_data_dashboard %}
+    <div class="row">
+        <div class="col-md-12">
+            {% include 'frontend/_modules/_breadcrumb.html.twig' %}
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-12 pl-4 mb-3">
+            <a href="#"><h3 class="category-title">Accessories</h3></a>
+        </div>
+    </div>
+    {% for i in 0..3 %}
+        <div class="row pl-2 pr-2">
+            {% for i in 0..3 %}
+                <div class="col-md-3 mb-3 pr-2 pl-2">
+                    {% include 'frontend/_modules/_product_item.html.twig' %}
+                </div>
+            {% endfor %}
+        </div>
+    {% endfor %}
+    <div class="row">
+        {% include 'frontend/_modules/_paginator.html.twig' %}
+    </div>
+{% endblock %}

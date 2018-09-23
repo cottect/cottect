@@ -1,0 +1,17 @@
+{% extends 'frontend/base.html.twig' %}
+
+{% block body_id 'globalBody' %}
+
+{% block body %}
+    <div id="globalContainer" class="front-page">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-6">
+                </div>
+                <div class="col-md-6 p-0">
+                    {% include 'frontend/_modules/_form/_register.html.twig' %}
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}

@@ -1,0 +1,85 @@
+$placeholder-color : #b3b3b1;
+
+#article-editor {
+  #btn-upload-header-image {
+    &:hover {
+      cursor: pointer;
+    }
+  }
+  img#image-header {
+    width: 100%;
+  }
+  .card-header {
+    padding: 0;
+    display: block;
+  }
+  .text-description{
+    padding: 5rem 0;
+    display: block;
+  }
+  .utils.position-fixed{
+    top: 10rem;
+    right: 0;
+  }
+  .article-title {
+    margin-bottom: 0;
+    input {
+      padding: 0;
+      margin-bottom: 0.5rem;
+      border: none;
+      font-size: 1.75rem;
+      color: rgba(0, 0, 0, .84);
+      &:hover, &:focus {
+        box-shadow: none;
+        outline: none;
+      }
+    }
+  }
+  .medium-editor-element{
+    font-size: 1rem;
+    min-height: 8rem;
+  }
+  .medium-editor-placeholder{
+    &:after{
+      font-style: normal;
+      color: $placeholder-color;
+    }
+  }
+  @import url(https://fonts.googleapis.com/css?family=Open+Sans:400italic);
+  blockquote{
+    font-size: 1.4em;
+    width:60%;
+    margin:50px auto;
+    font-family: Open Sans, sans-serif;
+    font-style:italic;
+    color: #555555;
+    padding:1.2em 30px 1.2em 75px;
+    border-left:8px solid #78C0A8 ;
+    line-height:1.6;
+    position: relative;
+    background:#EDEDED;
+  }
+
+  blockquote::before{
+    font-family: Arial, sans-serif;
+    content: "\201C";
+    color:#78C0A8;
+    font-size:4em;
+    position: absolute;
+    left: 10px;
+    top:-10px;
+  }
+
+  blockquote::after{
+    content: '';
+  }
+
+  blockquote span{
+    display:block;
+    color:#333333;
+    font-style: normal;
+    font-weight: bold;
+    margin-top:1em;
+  }
+
+}

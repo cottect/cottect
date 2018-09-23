@@ -1,0 +1,37 @@
+{% extends 'frontend/base.html.twig' %}
+
+{% block body_id 'register' %}
+
+{% block javascripts %}
+    {{ parent() }}
+{% endblock %}
+
+{% block body %}
+    <div id="globalContainer" class="jumbotron forgotten-account">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-12">
+                    <div class="card">
+                        <form>
+                            <h4 class="card-header">Find Your Account</h4>
+                            <div class="card-body">
+                                <div class="form-group">
+                                    <p>Please enter your email address or phone number to search for your account.</p>
+                                    <input type="email" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" placeholder="Mobile number or email address">
+                                </div>
+                            </div>
+                            <div class="card-footer text-right">
+                                <button type="submit" class="btn btn-primary">Search</button>
+                                <a href="{{ path('frontend_user_login') }}" class="btn btn-secondary">Cancel</a>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+{% endblock %}
+
+{% block sidebar %}
+    {{ parent() }}
+{% endblock %}
