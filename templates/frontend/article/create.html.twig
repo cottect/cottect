@@ -6,7 +6,8 @@
                 <div class="card">
                     <div class="card-header">
                         <div id="btn-upload-header-image" class="article-image-header text-center">
-                            <span class="text-description"><i class="fa fa-file-image-o" aria-hidden="true"></i> Drag or click to add a photo</span>
+                            <span class="text-description">
+                                <i class="fa fa-file-image-o" aria-hidden="true"></i> Drag or click to add a photo</span>
                             <img id="image-header" src="#" style="display: none">
                         </div>
                         <input type="file" id="image-header-input" style="display:none" accept="image/*"/>
@@ -22,6 +23,26 @@
                             </li>
                         </ul>
                         <div class="editable"></div>
+                    </div>
+                    <div class="card-footer text-muted">
+                        <button type="button" class="btn btn-outline-danger">Delete</button>
+                        <button type="button" class="btn btn-success float-right ml-2">Publish</button>
+                        <button type="button" class="btn btn-secondary float-right ml-2">Save</button>
+                        <div class="dropdown float-right ml-2">
+                            <button class="btn btn-outline-secondary dropdown-toggle"
+                                    type="button"
+                                    id="dropdownMenuButton"
+                                    data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                                <i class="fa fa-globe" aria-hidden="true"></i> Public
+                            </button>
+                            <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+                                <a class="dropdown-item" href="#">Action</a>
+                                <a class="dropdown-item" href="#">Another action</a>
+                                <a class="dropdown-item" href="#">Something else here</a>
+                            </div>
+                        </div>
+
+
                     </div>
                 </div>
             </form>

@@ -55,3 +55,5 @@ yarn-error.log
 /services/backup/*
 /services/resources/*
 /services/logs/*
+
+docker-compose.yml4
