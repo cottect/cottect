@@ -5,3 +5,5 @@ twig:
         - 'bootstrap_4_layout.html.twig'
         - 'frontend/form/layout.html.twig'
         - 'frontend/form/fields.html.twig'
+    globals:
+        google_recaptcha_key: '%env(GOOGLE_RECAPTCHA_KEY)%'
