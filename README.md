@@ -1,5 +1,6 @@
-Cottect
-========================
+<p align="center">
+    <img src="https://avatars1.githubusercontent.com/u/31560084?s=200&v=4" alt="October" width="25%" height="25%" />
+</p>
 
 [Cottect](https://cottect.com) is a Content Management System (CMS) and web platform.
 
@@ -59,3 +60,5 @@ Before sending a Pull Request, be sure to review the [Contributing Guidelines](C
 Please follow the following guides and code standards:
 
 * [PSR 4 Coding Standards](https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-4-autoloader.md)
+* [PSR 2 Coding Style Guide](https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-2-coding-style-guide.md)
+* [PSR 1 Coding Standards](https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-1-basic-coding-standard.md)
