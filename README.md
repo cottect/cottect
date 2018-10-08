@@ -1,10 +1,10 @@
 Cottect
 ========================
 
-Cottect is an open source project made by PHP Symfony. 
+[Cottect](https://cottect.com) is a Content Management System (CMS) and web platform.
 
-Installation
-------------
+
+### Installation
 
 * Using Docker compose for deployment on localhost:
 
@@ -44,3 +44,18 @@ $ docker exec -it cottect bash
 root@e2baea5ca20e:/var/www/html# yarn install
 root@e2baea5ca20e:/var/www/html# yarn encore dev
 ```
+
+### License
+
+The Cottect is open-sourced software licensed under the [MIT license](https://opensource.org/licenses/MIT).
+
+
+### Contributing
+
+Before sending a Pull Request, be sure to review the [Contributing Guidelines](CONTRIBUTING.md) first.
+
+### Coding standards
+
+Please follow the following guides and code standards:
+
+* [PSR 4 Coding Standards](https://github.com/php-fig/fig-standards/blob/master/accepted/PSR-4-autoloader.md)
