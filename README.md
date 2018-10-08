@@ -15,13 +15,16 @@ $ cp docker-compose.yml.dist docker-compose.yml
 * Change the MySQL password in `docker-compose.yml` file by replace `~` character. After that run this commands to build docker container
 
 ```bash
-$ docker-compose build .
+$ docker-compose build
 $ docker-compose up -d
-$ docker-exec -it cottect bash
+
 ```
 
+* Install packages
+
 ```bash
-$ composer install
+$ docker exec -it cottect bash
+root@e2baea5ca20e:/var/www/html# composer install
 ```
 
 * Update MySQL password and all parameters to `.env` file and make sure all parameters are correct.
@@ -29,14 +32,15 @@ $ composer install
 * Create a new database and tables by run this commands:
 
 ```bash
-$ php bin/console doctrine:database:create
-$ php bin/console doctrine:schema:create
+$ docker exec -it cottect bash
+root@e2baea5ca20e:/var/www/html# php bin/console doctrine:database:create
+root@e2baea5ca20e:/var/www/html# php bin/console doctrine:schema:create
 ```
 
 * Build assets with `yarn`
 
 ```bash
-$ yarn install
-$ yarn encore dev
+$ docker exec -it cottect bash
+root@e2baea5ca20e:/var/www/html# yarn install
+root@e2baea5ca20e:/var/www/html# yarn encore dev
 ```
-
