@@ -1,6 +1,6 @@
 version: "2"
 services:
-    core:
+    cottect:
         container_name: cottect
         build: .
         ports:
