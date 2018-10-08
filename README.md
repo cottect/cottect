@@ -1,6 +1,5 @@
-<p align="center">
-    <img src="https://avatars1.githubusercontent.com/u/31560084?s=200&v=4" alt="October" width="25%" height="25%" />
-</p>
+Cottect	<p align="center">
+========================
 
 [Cottect](https://cottect.com) is a Content Management System (CMS) and web platform.
 
