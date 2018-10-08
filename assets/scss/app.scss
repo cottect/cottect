@@ -240,7 +240,7 @@ nav#dashboardHeader .btn-link.btn-item {
   font-weight: bold;
 }
 
-nav#dashboardHeader .btn-link.btn-logout{
+nav#dashboardHeader .btn-link.btn-logout {
   padding: 0;
   margin: 0;
   color: $primary-color;
@@ -248,7 +248,7 @@ nav#dashboardHeader .btn-link.btn-logout{
   font-size: 0.8rem;
 }
 
-nav#dashboardHeader .btn-link.btn-logout:hover{
+nav#dashboardHeader .btn-link.btn-logout:hover {
   color: $hover-color;
 }
 
@@ -297,7 +297,7 @@ nav .vertical-line {
 
 #globalBody #globalContainer {
   padding: 7rem 0;
-  background: url(../images/background.jpg) no-repeat;
+  background: url(../images/love.jpg) no-repeat;
   background-size: 100%;
 }
 
@@ -438,7 +438,7 @@ footer li.list-inline-item.active a {
   box-shadow: 0 3px 8px rgba(0, 0, 0, .25);
 }
 
-.headDropdown.utils{
+.headDropdown.utils {
   width: 15rem;
 }
 
@@ -716,6 +716,10 @@ form#form-search .input-group-text {
   .card {
     height: 100%;
   }
+}
+
+img.article-image.img-fluid {
+  width: 100%;
 }
 
 div#user_register_frontend_form_birthday .form-control {
