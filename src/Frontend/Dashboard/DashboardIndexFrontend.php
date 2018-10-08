@@ -33,10 +33,10 @@ class DashboardIndexFrontend extends AuthenticationFrontend
     public function index(Request $request, SessionInterface $session)
     {
         $listUrl = [
-            'https://cottect.com/wp-content/uploads/2017/11/bfcm-apps-hero.jpg',
-            'https://cottect.com/wp-content/uploads/2017/11/marketplaces_hero_bd4de3bc-fcf9-4087-a4f8-bd2a91076bdb.jpg',
-            'https://cottect.com/wp-content/uploads/2017/11/Live-view.jpg',
-            'https://cottect.com/wp-content/uploads/2017/11/sequential_retargeting_hero.jpg',
+            'https://cdn.shopify.com/s/files/1/0070/7032/files/instagram_stickers_hero.png?v=1537977758',
+            'https://cdn.shopify.com/s/files/1/0070/7032/files/AR_hero_blog_ART.jpg?v=1536951978',
+            'https://cdn.shopify.com/s/files/1/0070/7032/files/shopify_masters_blog_wintersmiths.png?v=1534191098',
+            'https://cdn.shopify.com/s/files/1/0070/7032/files/shopify_masters_blog_kitty-poo-club.png?v=1533921365',
         ];
         return $this->render(
             Template::FRONTEND_DASHBOARD_INDEX,
