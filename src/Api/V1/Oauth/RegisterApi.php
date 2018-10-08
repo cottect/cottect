@@ -16,7 +16,6 @@ use Cottect\Services\Oauth\OauthTokenService;
 use Cottect\Services\User\UserRegisterFactoryService;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 
 /**
  * Class RegisterApiApi
@@ -25,8 +24,7 @@ use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 class RegisterApi extends GrantTypeRegisterApi
 {
     /**
-     * @Route("/oauth/register", name="api_v1_oauth_register")
-     * @Method({"POST"})
+     * @Route("/oauth/register", name="api_v1_oauth_register", methods={"POST"})
      *
      * @param Request $request
      * @param UserRegisterApiFrontendRequest $registerApiRequest

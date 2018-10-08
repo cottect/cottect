@@ -11,7 +11,6 @@ namespace Cottect\Api\V1\User;
 use Cottect\Api\V1\GrantTypeRegisterApi;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 
 /**
  * Class CheckPointApi

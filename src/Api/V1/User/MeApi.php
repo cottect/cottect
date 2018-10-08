@@ -11,13 +11,11 @@ namespace Cottect\Api\V1\User;
 use Cottect\Api\V1\AuthenticationApi;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 
 class MeApi extends AuthenticationApi
 {
     /**
-     * @Route("/user/me", name="api_v1_user_index")
-     * @Method({"GET"})
+     * @Route("/user/me", name="api_v1_user_index", methods={"POST", "GET"})
      *
      * @param Request $request
      *

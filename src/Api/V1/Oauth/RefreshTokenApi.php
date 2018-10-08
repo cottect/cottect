@@ -15,13 +15,11 @@ use Cottect\Services\Oauth\OauthRefreshOauthTokenService;
 use Cottect\Services\Oauth\OauthTokenService;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 
 class RefreshTokenApi extends GrantTypeRefreshTokenApi
 {
     /**
-     * @Route("/oauth/refresh_token", name="api_v1_oauth_refresh_token")
-     * @Method({"POST"})
+     * @Route("/oauth/refresh_token", name="api_v1_oauth_refresh_token", methods={"POST"})
      *
      * @param Request $request
      * @param RefreshTokenApiRequest $refreshTokenApiRequest

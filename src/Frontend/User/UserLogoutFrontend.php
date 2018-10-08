@@ -15,13 +15,11 @@ use Symfony\Component\HttpFoundation\Request;
 use Cottect\Utils\RouteName;
 use Cottect\Utils\RoutePath;
 use Symfony\Component\Routing\Annotation\Route;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 
 class UserLogoutFrontend extends AuthenticationFrontend
 {
     /**
      * @Route(RoutePath::FRONTEND_USER_LOGOUT, name=RouteName::FRONTEND_USER_LOGOUT)
-     * @Method({"POST"})
      * @param Request $request
      * @param Session $session
      *

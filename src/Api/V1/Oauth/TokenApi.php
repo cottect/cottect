@@ -18,13 +18,11 @@ use Cottect\Services\Oauth\OauthTokenService;
 use Cottect\Services\User\UserLoginService;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
-use Sensio\Bundle\FrameworkExtraBundle\Configuration\Method;
 
 class TokenApi extends GrantTypePasswordApi
 {
     /**
-     * @Route("/oauth/token", name="api_v1_oauth_token")
-     * @Method({"POST"})
+     * @Route("/oauth/token", name="api_v1_oauth_token", methods={"POST"})
      *
      * @param Request $request
      * @param UserLoginService $loginService
