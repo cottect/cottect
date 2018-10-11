@@ -1,4 +1,4 @@
-Cottect	<p align="center">
+Cottect
 ========================
 
 [Cottect](https://cottect.com) is a Content Management System (CMS) and web platform.
