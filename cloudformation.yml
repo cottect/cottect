@@ -37,7 +37,7 @@ Parameters:
   # EFS Mount
   EfsMountPoint:
     Type: String
-    Default: /var/www/html/wordpress/wp-content/uploads
+    Default: /var/www/html/cottect/uploads
   EfsFileSystemId:
     Type: String
     Default: fs-00000000
@@ -360,7 +360,7 @@ Resources:
           - config_cfn
           - install_packages
           - setup_uploads_efs
-          - config_wordpress
+          - config_cottect
           - config_php_fpm
           - start_services
           - dns_update_script
@@ -394,18 +394,18 @@ Resources:
         install_packages:
           commands:
             01_install_nginx:
-              command: "yum install -y htop vim mlocate git nginx mysql56 php70-fpm php70-mysqlnd php70-gd php70-mbstring php70-mcrypt"
-            02_download_wordpress:
+              command: "sudo yum install -y htop wget vim mlocate git nginx mysql56 php72-fpm php72-mysqli php72-pdo_mysql php72-gettext php72-intl php72-bcmath php72-gd php72-mbstring php72-mcrypt"
+            04_download_cottect:
               cwd: /tmp/
-              command: "wget https://wordpress.org/latest.tar.gz"
-            03_create_www:
-              command: "mkdir -p /var/www/html"
-            04_extract_wordpress:
+              command: "sudo wget https://github.com/cottect/cottect/tarball/master"
+            05_create_www:
+              command: "sudo mkdir -p /var/www/html"
+            06_extract_cottect:
               cwd: /tmp/
-              command: "tar -xvzf latest.tar.gz -C /var/www/html/"
-            05_chmod_wordpress:
-              cwd: /var/www/html/
-              command: "chown -R nginx:nginx /var/www/html/wordpress"
+              command: "sudo tar -xvzf master -C ."
+            07_rename_folder:
+              cwd: /tmp/
+              command: "sudo mv cottect-* /var/www/html/cottect"
         setup_uploads_efs:
           commands:
             01_make_mount_dir:
@@ -417,17 +417,17 @@ Resources:
                 echo "${EfsFileSystemId}.efs.${AWS::Region}.amazonaws.com:/ ${EfsMountPoint} nfs4 nfsvers=4.1,rsize=1048576,wsize=1048576,hard,timeo=600,retrans=2 0 0" >> /etc/fstab
             03_mount_efs:
               command: "mount -a -t nfs4"
-        config_wordpress:
+        config_cottect:
           files:
-            "/etc/nginx/conf.d/wordpress.conf":
+            "/etc/nginx/conf.d/cottect.conf":
               content: !Sub |
                 server {
                         listen 80;
                         server_name ${RecordName};
-                        root   /var/www/html/wordpress;
+                        root   /var/www/html/cottect;
                         index index.php index.html index.htm;
-                        access_log /var/log/nginx/wordpress_access.log;
-                        error_log /var/log/nginx/wordpress_error.log;
+                        access_log /var/log/nginx/cottect_access.log;
+                        error_log /var/log/nginx/cottect_error.log;
 
                         location / {
                             try_files $uri $uri/ @handler;
@@ -435,7 +435,7 @@ Resources:
 
                         location @handler {
                             fastcgi_pass 127.0.0.1:9000;
-                            fastcgi_param SCRIPT_FILENAME /var/www/html/wordpress/index.php;
+                            fastcgi_param SCRIPT_FILENAME /var/www/html/cottect/public/index.php;
                             include /etc/nginx/fastcgi_params;
                             fastcgi_param SCRIPT_NAME /index.php;
                         }
@@ -444,7 +444,7 @@ Resources:
                             try_files $uri @handler;
                             fastcgi_pass    127.0.0.1:9000;
                             fastcgi_index   index.php;
-                            fastcgi_param SCRIPT_FILENAME /var/www/html/wordpress$fastcgi_script_name;
+                            fastcgi_param SCRIPT_FILENAME /var/www/html/cottect$fastcgi_script_name;
                             include fastcgi_params;
                         }
 
@@ -461,63 +461,6 @@ Resources:
                             deny all;
                         }
                 }
-            "/var/www/html/wordpress/wp-config.php":
-              mode: "000444"
-              content: !Sub |
-                <?php
-
-                // Override Site URL Links So can Change if Lose Access
-                define('WP_HOME','http://${RecordName}');
-                define('WP_SITEURL','http://${RecordName}');
-
-                // Use X-Forwarded-For HTTP Header to Get Visitor's Real IP Address
-                if ( isset( $_SERVER['HTTP_X_FORWARDED_FOR'] ) ) {
-                    $http_x_headers = explode( ',', $_SERVER['HTTP_X_FORWARDED_FOR'] );
-                    $_SERVER['REMOTE_ADDR'] = $http_x_headers[0];
-                };
-
-                //** MySQL settings **//
-
-                //define('WP_CACHE', true); //Added by WP-Cache Manager
-                //define( 'WPCACHEHOME', '/var/www/html/fitnessjerk/wordpress/wp-content/plugins/wp-super-cache/' ); //Added by WP-Cache Manager
-                define('DB_NAME', '${DbName}');
-                define('DB_USER', '${DbUser}');
-                define('DB_PASSWORD', '${DbPassword}');
-                define('DB_HOST', '${DbHost}');
-                define('DB_CHARSET', 'utf8');
-                define('DB_COLLATE', '');
-
-                // Authentication Unique Keys and Salts.
-                // !! GENERATE NEW KEYS HERE https://api.wordpress.org/secret-key/1.1/salt/ !!
-                // * You can change these at any point in time to invalidate all existing cookies. This will force all users to have to log in again.
-                define('AUTH_KEY',         '*Hr_p^*t]Udv,#h5Gkr8lmH305x|]zY|8FPq@W;o1+F3:1$il2riUD]xDa<5!-Dm');
-                define('SECURE_AUTH_KEY',  'pPR%Ko>mcxArjx|~R4>(d,m|j8CHbC=[H,?H-u}+AUe-r+z|yN5RCX4u#wxv~-3w');
-                define('LOGGED_IN_KEY',    '0,4qFm(U 1z$KgvO7O3Jw`WFQ^|9S,ncWU~}**CcLEp.NKS$-X>8t~Qs}^k &Xw}');
-                define('NONCE_KEY',        'K{Jqq;1Ht|Dvb8h:8VU+0c~SX:>6{tov>;|5r6_Ion HnC*Z{[(DF2~Cj8oNaRS-');
-                define('AUTH_SALT',        'X,!UHJ|*T-Q|ETI18<E^g,iwj*DR~T4tPaycs8g0SpKK/n!a=}=Qm<GT-U!;xvpY');
-                define('SECURE_AUTH_SALT', 'Q5AyCu^VXmSF:J$RkjLdXR7a2Wzue_,1u=c8e[~>y#BH;5WLvdt|tZIhd@SWJZG&');
-                define('LOGGED_IN_SALT',   'e-l|RXjB03R5n|S-;C4AV;jjrUA>B%| (g0E+-6{hei%D:OiARo+T@Pa=Rv}V+R8');
-                define('NONCE_SALT',       '<evTKny<laV}0i%RJ2`OL;FqUb&?([0rciK|r1>,,-<!R-Ex&vGNVlV_DXjJpx^Q');
-
-                $table_prefix  = 'wp_';
-
-                define('WP_DEBUG', false);
-
-                // Absolute path to the WordPress directory.
-                if ( !defined('ABSPATH') )
-                    define('ABSPATH', dirname(__FILE__) . '/');
-
-                define('WP_MEMORY_LIMIT', '128M');
-
-                // Sets up WordPress vars and included files.
-                require_once(ABSPATH . 'wp-settings.php');
-
-                // Disable Automatic Updating
-                define('WP_AUTO_UPDATE_CORE', false);
-                add_filter( 'auto_update_plugin', '__return_false' );
-                add_filter( 'auto_update_theme', '__return_false' );
-
-                ?>
         config_php_fpm:
           commands:
             01_replace_apache_with_nginx_user:
@@ -551,7 +494,7 @@ Resources:
                       "Action": "UPSERT",
                       "ResourceRecordSet": {
                         "Name": "${RecordName}",
-                        "Type": "CNAME",
+                        "Type": "A",
                         "TTL": 60,
                         "ResourceRecords": [
                           {
