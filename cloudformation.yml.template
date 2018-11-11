@@ -1,14 +1,11 @@
 ---
 AWSTemplateFormatVersion: '2010-09-09'
-Description: Single EC2 Running Wordpress on Nginx, RDS Backed, Behind LB by Levon Becker v20170124-1600
+Description: Cottect Cloudformation
 Parameters:
-  # Ownership
-  Owner:
+  GithubBranch:
     Type: String
-    Default: FirstName LastName
-  DeleteAfter:
-    Type: String
-    Default: 00/00/201x
+    Description: Github Branch
+    Default: master
 
   # Network
   VPC:
@@ -27,12 +24,11 @@ Parameters:
   # DNS
   HostedZoneId:
     Type: AWS::Route53::HostedZone::Id
-    Description: Route53 Hosted Zone ID (Z1234567890).
-    Default: Z1234567890
+    Description: Route53 Hosted Zone ID.
   RecordName:
     Type: String
     Description: DNS Record Name (www.example.com)
-    Default: www.example.com
+    Default: blog.cottect.com
 
   # EFS Mount
   EfsMountPoint:
@@ -48,23 +44,23 @@ Parameters:
   InstanceType:
     Type: String
     AllowedValues:
-    - t2.nano
-    - t2.micro
-    - t2.small
-    - t2.medium
-    - m3.medium
-    - m4.large
-    - c3.medium
-    - c4.medium
-    Default: t2.small
+    - t3.nano
+    - t3.micro
+    - t3.small
+    - t3.medium
+    - c5.large
+    - c5.xlarge
+    Default: t3.medium
 
   # Database
   DbHost:
     Type: String
   DbName:
     Type: String
+    Default: cottect
   DbUser:
     Type: String
+    Default: cottect
   DbPassword:
     Type: String
     NoEcho: 'true'
@@ -72,12 +68,11 @@ Parameters:
 Metadata:
   AWS::CloudFormation::Interface:
     ParameterGroups:
-    # Ownership
+    # Github branch
     - Label:
-        default: Ownership
+        default: Github branch
       Parameters:
-      - Owner
-      - DeleteAfter
+        - GithubBranch
 
     # Network
     - Label:
@@ -122,12 +117,6 @@ Metadata:
       - DbPassword
 
     ParameterLabels:
-      # Ownership
-      Owner:
-        default: Team or Individual Owner
-      DeleteAfter:
-        default: Delete After Date
-
       # Network
       VPC:
         default: VPC ID
@@ -308,10 +297,6 @@ Resources:
       Tags:
       - Key: Name
         Value: !Ref "AWS::StackName"
-      - Key: Owner
-        Value: !Ref Owner
-      - Key: DeleteAfter
-        Value: !Ref DeleteAfter
 
   # EC2 Instance
   EC2Instance:
@@ -341,10 +326,6 @@ Resources:
       Tags:
       - Key: Name
         Value: !Ref "AWS::StackName"
-      - Key: Owner
-        Value: !Ref Owner
-      - Key: DeleteAfter
-        Value: !Ref DeleteAfter
       UserData:
         Fn::Base64: !Sub |
           #!/bin/bash -xe
@@ -352,21 +333,27 @@ Resources:
           yum install -y aws-cfn-bootstrap cloud-init aws-cli
           /opt/aws/bin/cfn-init -v --stack ${AWS::StackName} --resource EC2Instance --region ${AWS::Region} --configsets ec2_setup
           /opt/aws/bin/cfn-signal -e $? --stack ${AWS::StackName} --resource EC2Instance --region ${AWS::Region}
-
     Metadata:
       AWS::CloudFormation::Init:
         configSets:
           ec2_setup:
-          - config_cfn
-          - install_packages
-          - setup_uploads_efs
-          - config_cottect
-          - config_php_fpm
-          - start_services
-          - dns_update_script
-          - update_dns
-          - warm_ebs
-        config_cfn:
+          - cfn_install_packages
+          - cfn_install_nodejs_script
+          - cfn_install_nodejs
+          - cfn_install_cottect
+          - cfn_get_composer_script
+          - cfn_get_composer
+          - cfn_composer_install
+          - cfn_yarn_install
+          - cfn_add_environment_config_script
+          - cfn_add_environment_config
+          - cfn_create_database
+          - cfn_setup_uploads_efs
+          - cfn_config_cottect
+          - cfn_start_services
+          - cfn_dns_update_script
+          - cfn_update_dns
+        cfn_config:
           files:
             "/etc/cfn/cfn-hup.conf":
               content: !Sub |
@@ -391,22 +378,94 @@ Resources:
                 files:
                 - /etc/cfn/cfn-hup.conf
                 - /etc/cfn/hooks.d/cfn-auto-reloader.conf
-        install_packages:
+        cfn_install_packages:
           commands:
-            01_install_nginx:
-              command: "sudo yum install -y htop wget vim mlocate git nginx mysql56 php72-fpm php72-mysqli php72-pdo_mysql php72-gettext php72-intl php72-bcmath php72-gd php72-mbstring php72-mcrypt"
-            04_download_cottect:
-              cwd: /tmp/
-              command: "sudo wget https://github.com/cottect/cottect/tarball/master"
-            05_create_www:
-              command: "sudo mkdir -p /var/www/html"
-            06_extract_cottect:
-              cwd: /tmp/
-              command: "sudo tar -xvzf master -C ."
-            07_rename_folder:
-              cwd: /tmp/
-              command: "sudo mv cottect-* /var/www/html/cottect"
-        setup_uploads_efs:
+            01_install_packages:
+              command: "sudo yum install -y telnet htop wget vim mlocate git nginx php72-fpm php72-mysqli php72-pdo_mysql php72-gettext php72-intl php72-bcmath php72-gd php72-mbstring php72-mcrypt"
+        cfn_install_nodejs_script:
+          files:
+            "/tmp/install-nodejs":
+              mode: '000777'
+              content: !Sub |
+                #!/bin/bash
+                curl --silent --location https://rpm.nodesource.com/setup_10.x | sudo bash -
+                curl --silent --location https://dl.yarnpkg.com/rpm/yarn.repo | sudo tee /etc/yum.repos.d/yarn.repo
+                yum install -y nodejs
+                yum install -y yarn
+        cfn_install_nodejs:
+          commands:
+            01_run_script:
+              command: "sudo /tmp/install-nodejs"
+        cfn_install_cottect:
+          commands:
+            01_create_directory:
+              command: "mkdir -p /var/www/html"
+            02_grant_permission:
+              command: "chown -R ec2-user:ec2-user /var/www/html"
+            03_clone_repository:
+              cwd: /var/www/html
+              command: "git clone https://github.com/cottect/cottect.git"
+            04_checkout_branch:
+              cwd: /var/www/html/cottect
+              command: !Sub |
+                git checkout ${GithubBranch}
+            05_grant_permssion:
+              cwd: /var/www/html/cottect
+              command: "chown -R ec2-user:ec2-user ."
+        cfn_get_composer_script:
+          files:
+            "/tmp/get-composer":
+              mode: '000777'
+              content: !Sub |
+                #!/bin/bash
+                curl -s https://getcomposer.org/installer | php
+                sudo chmod +x composer.phar && sudo mv composer.phar /usr/bin/composer
+        cfn_get_composer:
+          commands:
+            01_run_script:
+              command: "sudo /tmp/get-composer"
+        cfn_composer_install:
+          commands:
+            01_composer_install:
+              cwd: /var/www/html/cottect
+              command: !Sub |
+                export COMPOSER_HOME=~
+                composer install --prefer-dist --no-interaction
+            02_grant_permission:
+              cwd: /var/www/html/cottect
+              command: "sudo chown -R ec2-user:ec2-user ."
+        cfn_yarn_install:
+          commands:
+            01_install_yarn:
+              cwd: /var/www/html/cottect
+              command: "yarn install && yarn encore production"
+        cfn_add_environment_config_script:
+          files:
+            "/tmp/update-environment":
+              mode: '000777'
+              content: !Sub |
+                #!/bin/bash
+                rm -rf .env
+                cp .env.dist .env
+                sed -i 's/database_username_here/${DbUser}/g' .env
+                sed -i 's/database_password_here/${DbPassword}/g' .env
+                sed -i 's/database_host_here/${DbHost}/g' .env
+                sed -i 's/database_port_here/3306/g' .env
+                sed -i 's/database_name_here/${DbName}/g' .env
+                sed -i 's/environment_here/prod/g' .env
+                rm -rf src/DataFixtures/AppFixtures.php
+                chown -R nginx:nginx /var/log/nginx
+        cfn_add_environment_config:
+          commands:
+            01_run_script:
+              cwd: /var/www/html/cottect
+              command: "sudo /tmp/update-environment"
+        cfn_create_database:
+          commands:
+            01_update_table:
+              cwd: /var/www/html/cottect
+              command: "php bin/console doctrine:schema:update --force"
+        cfn_setup_uploads_efs:
           commands:
             01_make_mount_dir:
               cwd: /var/www/html
@@ -417,72 +476,50 @@ Resources:
                 echo "${EfsFileSystemId}.efs.${AWS::Region}.amazonaws.com:/ ${EfsMountPoint} nfs4 nfsvers=4.1,rsize=1048576,wsize=1048576,hard,timeo=600,retrans=2 0 0" >> /etc/fstab
             03_mount_efs:
               command: "mount -a -t nfs4"
-        config_cottect:
+        cfn_config_cottect:
           files:
             "/etc/nginx/conf.d/cottect.conf":
               content: !Sub |
                 server {
-                        listen 80;
-                        server_name ${RecordName};
-                        root   /var/www/html/cottect;
-                        index index.php index.html index.htm;
-                        access_log /var/log/nginx/cottect_access.log;
-                        error_log /var/log/nginx/cottect_error.log;
+                  listen 80;
+                  server_name ${RecordName};
+                  root /var/www/html/cottect/public;
 
-                        location / {
-                            try_files $uri $uri/ @handler;
-                        }
+                  index index.php;
 
-                        location @handler {
-                            fastcgi_pass 127.0.0.1:9000;
-                            fastcgi_param SCRIPT_FILENAME /var/www/html/cottect/public/index.php;
-                            include /etc/nginx/fastcgi_params;
-                            fastcgi_param SCRIPT_NAME /index.php;
-                        }
+                  error_log  /var/log/nginx/cottect_access.log;
+                  access_log /var/log/nginx/cottect_error.log;
 
-                        location ~ .php$ {
-                            try_files $uri @handler;
-                            fastcgi_pass    127.0.0.1:9000;
-                            fastcgi_index   index.php;
-                            fastcgi_param SCRIPT_FILENAME /var/www/html/cottect$fastcgi_script_name;
-                            include fastcgi_params;
-                        }
+                  location / {
+                    try_files $uri /index.php$is_args$args;
+                  }
 
-                        # Plugin Handles This
-                        #location = /favicon.ico { access_log off; log_not_found off; }
+                  location ~ .php(/|$) {
+                    fastcgi_split_path_info ^(.+\.php)(/.*)$;
+                    fastcgi_pass unix:/var/run/php-fpm/www.sock;
+                    include fastcgi_params;
+                    fastcgi_param SCRIPT_FILENAME $realpath_root$fastcgi_script_name;
+                    fastcgi_param DOCUMENT_ROOT $realpath_root;
+                  }
 
-                        # Plugin Handles This
-                        #location = /robots.txt { access_log off; log_not_found off; allow all; }
-
-                        #    Prevent access to any files starting with a dot, like .htaccess or text editor temp files
-                        location ~ /\. { access_log off; log_not_found off; deny all; }
-
-                        location ~* /(?:uploads|files)/.*\.php$ {
-                            deny all;
-                        }
+                  location ~ \.php$ {
+                    return 404;
+                  }
                 }
-        config_php_fpm:
-          commands:
-            01_replace_apache_with_nginx_user:
-              command: "sed -i 's/apache/nginx/g' /etc/php-fpm-7.0.d/www.conf"
-            02_set_ownership_logs_dir:
-              command: "chown -R nginx:nginx /var/log/php-fpm"
-            03_set_ownership_session_dir:
-              command: "chown -R root:nginx /var/lib/php/7.0/"
-        start_services:
+        cfn_start_services:
           commands:
             01_start_php_fpm:
-              command: "service php-fpm-7.0 restart"
+              command: "sudo service php-fpm start"
             02_start_nginx:
-              command: "service nginx restart"
+              command: "sudo service nginx start"
             03_onboot_php_fpm:
-              command: "chkconfig nginx on"
+              command: "sudo chkconfig nginx on"
             04_onboot_nginx:
-              command: "chkconfig php-fpm-7.0 on"
-        dns_update_script:
+              command: "sudo chkconfig php-fpm on"
+        cfn_dns_update_script:
           files:
-            "/usr/sbin/update-dns":
-              mode: "000755"
+            "/tmp/update-dns":
+              mode: '000777'
               content: !Sub |
                 #!/bin/bash
 
@@ -498,7 +535,7 @@ Resources:
                         "TTL": 60,
                         "ResourceRecords": [
                           {
-                            "Value": "$(curl http://169.254.169.254/latest/meta-data/local-ipv4/)"
+                            "Value": "$(curl http://169.254.169.254/latest/meta-data/public-ipv4/)"
                           }
                         ]
                       }
@@ -508,28 +545,16 @@ Resources:
                 EOF
 
                 aws route53 change-resource-record-sets --hosted-zone-id "${HostedZoneId}" --change-batch "file:///tmp/route53-upsert.json"
-        update_dns:
+        cfn_update_dns:
           commands:
             01_run_script:
-              command: "/usr/sbin/update-dns"
-        warm_ebs:
-          commands:
-            01_warm_ebs:
-              command: "echo 'ACTION: Performing EBS Warming' && dd if=/dev/xvda of=/dev/xvda conv=notrunc bs=1M status=progress"
+              command: "sudo /tmp/update-dns"
       CreationPolicy:
         ResourceSignal:
           Count: 1
           Timeout: PT20M
 
 Outputs:
-  # Ownership
-  Owner:
-    Description: Team or Individual that Owns this Formation.
-    Value: !Ref Owner
-  DeleteAfter:
-    Description: It is ok to delete the Formation after this date.
-    Value: !Ref DeleteAfter
-
   # Network
   VPC:
     Value: !Ref VPC
