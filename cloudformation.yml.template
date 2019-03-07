@@ -1,0 +1,598 @@
+---
+AWSTemplateFormatVersion: '2010-09-09'
+Description: Cottect Cloudformation
+Parameters:
+  GithubBranch:
+    Type: String
+    Description: Github Branch
+    Default: master
+
+  # Network
+  VPC:
+    Type: AWS::EC2::VPC::Id
+  SubnetId:
+    Type: AWS::EC2::Subnet::Id
+  InternalAccessSecurityGroup:
+    Type: AWS::EC2::SecurityGroup::Id
+  RemoteSecurityGroup:
+    Type: AWS::EC2::SecurityGroup::Id
+  RdsSecurityGroup:
+    Type: AWS::EC2::SecurityGroup::Id
+  EfsSecurityGroup:
+    Type: AWS::EC2::SecurityGroup::Id
+
+  # DNS
+  HostedZoneId:
+    Type: AWS::Route53::HostedZone::Id
+    Description: Route53 Hosted Zone ID.
+  RecordName:
+    Type: String
+    Description: DNS Record Name (www.example.com)
+    Default: blog.cottect.com
+
+  # EFS Mount
+  EfsMountPoint:
+    Type: String
+    Default: /var/www/html/cottect/uploads
+  EfsFileSystemId:
+    Type: String
+    Default: fs-00000000
+
+  # Instance
+  KeyPairName:
+    Type: AWS::EC2::KeyPair::KeyName
+  InstanceType:
+    Type: String
+    AllowedValues:
+    - t3.nano
+    - t3.micro
+    - t3.small
+    - t3.medium
+    - c5.large
+    - c5.xlarge
+    Default: t3.medium
+
+  # Database
+  DbHost:
+    Type: String
+  DbName:
+    Type: String
+    Default: cottect
+  DbUser:
+    Type: String
+    Default: cottect
+  DbPassword:
+    Type: String
+    NoEcho: 'true'
+
+Metadata:
+  AWS::CloudFormation::Interface:
+    ParameterGroups:
+    # Github branch
+    - Label:
+        default: Github branch
+      Parameters:
+        - GithubBranch
+
+    # Network
+    - Label:
+        default: Network
+      Parameters:
+      - VPC
+      - SubnetId
+      - SecurityGroup
+      - InternalAccessSecurityGroup
+      - RemoteSecurityGroup
+      - RdsSecurityGroup
+      - EfsSecurityGroup
+
+    # Instance Settings
+    - Label:
+        default: Instance
+      Parameters:
+      - KeyPairName
+      - InstanceType
+
+    # DNS
+    - Label:
+        default: DNS
+      Parameters:
+      - RecordName
+      - HostedZoneId
+
+    # EFS
+    - Label:
+        default: EFS
+      Parameters:
+      - EfsMountPoint
+      - EfsFileSystemId
+
+    # Database
+    - Label:
+        default: Database Config
+      Parameters:
+      - DbHost
+      - DbName
+      - DbUser
+      - DbPassword
+
+    ParameterLabels:
+      # Network
+      VPC:
+        default: VPC ID
+      SubnetId:
+        default: Subnet ID
+      InternalAccessSecurityGroup:
+        default: Internal Access Security Group
+      RemoteSecurityGroup:
+        default: Remote Security Group
+      RdsSecurityGroup:
+        default: RDS Security Group
+      EfsSecurityGroup:
+        default: EFS Security Group
+
+      # Instance Settings
+      KeyPairName:
+        default: EC2 Key Pair Name
+      InstanceType:
+        default: Instance Type
+
+      # DNS
+      RecordName:
+        default: Record Name
+      HostedZoneId:
+        default: Hosted Zone ID
+
+      # EFS
+      EfsMountPoint:
+        default: EFS Mount Point
+      EfsFileSystemId:
+        default: EFS File System Id
+
+      # Database
+      DbHost:
+        default: Database Host
+      DbName:
+        default: Database Name
+      DbUser:
+        default: Database User
+      DbPassword:
+        default: Database Password
+
+Mappings:
+  RegionMap:
+    # Amazon Linux AMI 2016.09.0 was released on 2016-09-27
+    us-east-1:
+      InstanceStore: ami-de3860c9
+      EBS: ami-b73b63a0
+    us-west-2:
+      InstanceStore: ami-44c36524
+      EBS: ami-5ec1673e
+    us-west-1:
+      InstanceStore: ami-34e9a254
+      EBS: ami-23e8a343
+    eu-west-1:
+      InstanceStore: ami-d998d3aa
+      EBS: ami-9398d3e0
+    eu-central-1:
+      InstanceStore: ami-0f639b60
+      EBS: ami-f9619996
+    ap-southeast-1:
+      InstanceStore: ami-7a54f519
+      EBS: ami-b953f2da
+    ap-northeast-1:
+      InstanceStore: ami-0a12b16b
+      EBS: ami-0c11b26d
+    ap-northeast-2:
+      InstanceStore: ami-ba35e1d4
+      EBS: ami-983ce8f6
+    ap-southeast-2:
+      InstanceStore: ami-41754922
+      EBS: ami-db704cb8
+    sa-east-1:
+      InstanceStore: ami-59bd2135
+      EBS: ami-97831ffb
+    us-gov-west-1:
+      InstanceStore: ami-e0b10981
+      EBS: ami-7cb1091d
+    cn-north-1:
+      InstanceStore: ami-81eb3fec
+      EBS: ami-7c15c111
+
+Resources:
+  # CloudWatch
+  CloudWatchLogsGroup:
+    Type: AWS::Logs::LogGroup
+    Properties:
+      LogGroupName: !Ref "AWS::StackName"
+      RetentionInDays: '30'
+
+  # IAM
+  IamRole:
+    Type: AWS::IAM::Role
+    Properties:
+      RoleName: !Ref AWS::StackName
+      ManagedPolicyArns:
+      - arn:aws:iam::aws:policy/ReadOnlyAccess
+      AssumeRolePolicyDocument:
+        Statement:
+        - Effect: Allow
+          Principal:
+            Service:
+            - ec2.amazonaws.com
+          Action:
+          - sts:AssumeRole
+      Path: "/"
+
+  IamPolicies:
+    Type: AWS::IAM::Policy
+    DependsOn: IamRole
+    Properties:
+      PolicyName: !Join [ '', [ !Ref "AWS::StackName", -instance-policy ] ]
+      Roles: [!Ref IamRole]
+      PolicyDocument:
+        Version: '2012-10-17'
+        Statement:
+        # Allow Full S3 Access
+        - Effect: Allow
+          Action:
+          - s3:*
+          Resource: "*"
+        # Allow Read/Write Route53 for Userdata Script DNS A Record Set
+        - Effect: Allow
+          Action:
+          - route53:ChangeResourceRecordSets
+          - route53:Get*
+          - route53:List*
+          Resource: "*"
+        # Allow Write CloudWatch Logs
+        - Effect: Allow
+          Action:
+          - cloudwatch:PutMetricData
+          Resource: "*"
+        - Effect: Allow
+          Action:
+          - logs:PutLogEvents
+          - logs:CreateLogStream
+          - logs:DescribeLogStreams
+          - logs:CreateLogGroup
+          Resource:
+            Fn::Join:
+            - ''
+            - - 'arn:aws:logs:'
+              - !Ref AWS::Region
+              - ":"
+              - !Ref AWS::AccountId
+              - ":log-group:"
+              - !Ref CloudWatchLogsGroup
+              - ":log-stream:*"
+
+  IamInstanceProfile:
+    Type: AWS::IAM::InstanceProfile
+    DependsOn: IamRole
+    Properties:
+      Path: "/"
+      Roles: [!Ref IamRole]
+
+  # Security Groups
+  SecurityGroup:
+    Type: AWS::EC2::SecurityGroup
+    Properties:
+      GroupDescription: Allow Web Traffic to Instance
+      VpcId: !Ref VPC
+      SecurityGroupIngress:
+      - IpProtocol: tcp
+        FromPort: 80
+        ToPort: 80
+        CidrIp: 0.0.0.0/0
+      - IpProtocol: tcp
+        FromPort: 443
+        ToPort: 443
+        CidrIp: 0.0.0.0/0
+      SecurityGroupEgress:
+      - IpProtocol: "-1"
+        FromPort: "-1"
+        ToPort: "-1"
+        CidrIp: 0.0.0.0/0
+      Tags:
+      - Key: Name
+        Value: !Ref "AWS::StackName"
+
+  # EC2 Instance
+  EC2Instance:
+    Type: AWS::EC2::Instance
+    DependsOn:
+    - SecurityGroup
+    - IamInstanceProfile
+    Properties:
+      IamInstanceProfile: !Ref IamInstanceProfile
+      InstanceType: !Ref InstanceType
+      KeyName: !Ref KeyPairName
+      SubnetId: !Ref SubnetId
+      SecurityGroupIds:
+      - !Ref SecurityGroup
+      - !Ref InternalAccessSecurityGroup
+      - !Ref RemoteSecurityGroup
+      - !Ref RdsSecurityGroup
+      - !Ref EfsSecurityGroup
+      ImageId: !FindInMap [ RegionMap, !Ref "AWS::Region", EBS ]
+      Monitoring: false
+      BlockDeviceMappings:
+      - DeviceName: /dev/xvda
+        Ebs:
+          DeleteOnTermination: true
+          VolumeType: gp2
+          VolumeSize: 8
+      Tags:
+      - Key: Name
+        Value: !Ref "AWS::StackName"
+      UserData:
+        Fn::Base64: !Sub |
+          #!/bin/bash -xe
+          yum update -y
+          yum install -y aws-cfn-bootstrap cloud-init aws-cli
+          /opt/aws/bin/cfn-init -v --stack ${AWS::StackName} --resource EC2Instance --region ${AWS::Region} --configsets ec2_setup
+          /opt/aws/bin/cfn-signal -e $? --stack ${AWS::StackName} --resource EC2Instance --region ${AWS::Region}
+    Metadata:
+      AWS::CloudFormation::Init:
+        configSets:
+          ec2_setup:
+          - cfn_install_packages
+          - cfn_install_nodejs_script
+          - cfn_install_nodejs
+          - cfn_install_cottect
+          - cfn_get_composer_script
+          - cfn_get_composer
+          - cfn_composer_install
+          - cfn_yarn_install
+          - cfn_add_environment_config_script
+          - cfn_add_environment_config
+          - cfn_create_database
+          - cfn_setup_uploads_efs
+          - cfn_config_cottect
+          - cfn_start_services
+          - cfn_dns_update_script
+          - cfn_update_dns
+        cfn_config:
+          files:
+            "/etc/cfn/cfn-hup.conf":
+              content: !Sub |
+                [main]
+                stack=${AWS::StackId}
+                region=${AWS::Region}
+              mode: '000400'
+              owner: root
+              group: root
+            "/etc/cfn/hooks.d/cfn-auto-reloader.conf":
+              content: !Sub |
+                [cfn-auto-reloader-hook]
+                triggers=post.update
+                path=Resources.EC2Instance.Metadata.AWS::CloudFormation::Init
+                action=/opt/aws/bin/cfn-init -v --stack ${AWS::StackName} --resource EC2Instance --region ${AWS::Region} --configsets ec2_setup
+                runas=root
+          services:
+            sysvinit:
+              cfn-hup:
+                enabled: true
+                ensureRunning: true
+                files:
+                - /etc/cfn/cfn-hup.conf
+                - /etc/cfn/hooks.d/cfn-auto-reloader.conf
+        cfn_install_packages:
+          commands:
+            01_install_packages:
+              command: "sudo yum install -y telnet htop wget vim mlocate git nginx php72-fpm php72-mysqli php72-pdo_mysql php72-gettext php72-intl php72-bcmath php72-gd php72-mbstring php72-mcrypt"
+        cfn_install_nodejs_script:
+          files:
+            "/tmp/install-nodejs":
+              mode: '000777'
+              content: !Sub |
+                #!/bin/bash
+                curl --silent --location https://rpm.nodesource.com/setup_10.x | sudo bash -
+                curl --silent --location https://dl.yarnpkg.com/rpm/yarn.repo | sudo tee /etc/yum.repos.d/yarn.repo
+                yum install -y nodejs
+                yum install -y yarn
+        cfn_install_nodejs:
+          commands:
+            01_run_script:
+              command: "sudo /tmp/install-nodejs"
+        cfn_install_cottect:
+          commands:
+            01_create_directory:
+              command: "mkdir -p /var/www/html"
+            02_grant_permission:
+              command: "chown -R ec2-user:ec2-user /var/www/html"
+            03_clone_repository:
+              cwd: /var/www/html
+              command: "git clone https://github.com/cottect/cottect.git"
+            04_checkout_branch:
+              cwd: /var/www/html/cottect
+              command: !Sub |
+                git checkout ${GithubBranch}
+            05_grant_permssion:
+              cwd: /var/www/html/cottect
+              command: "chown -R ec2-user:ec2-user ."
+        cfn_get_composer_script:
+          files:
+            "/tmp/get-composer":
+              mode: '000777'
+              content: !Sub |
+                #!/bin/bash
+                curl -s https://getcomposer.org/installer | php
+                sudo chmod +x composer.phar && sudo mv composer.phar /usr/bin/composer
+        cfn_get_composer:
+          commands:
+            01_run_script:
+              command: "sudo /tmp/get-composer"
+        cfn_composer_install:
+          commands:
+            01_composer_install:
+              cwd: /var/www/html/cottect
+              command: !Sub |
+                export COMPOSER_HOME=~
+                composer install --prefer-dist --no-interaction
+            02_grant_permission:
+              cwd: /var/www/html/cottect
+              command: "sudo chown -R ec2-user:ec2-user ."
+        cfn_yarn_install:
+          commands:
+            01_install_yarn:
+              cwd: /var/www/html/cottect
+              command: "yarn install && yarn encore production"
+        cfn_add_environment_config_script:
+          files:
+            "/tmp/update-environment":
+              mode: '000777'
+              content: !Sub |
+                #!/bin/bash
+                rm -rf .env
+                cp .env.dist .env
+                sed -i 's/database_username_here/${DbUser}/g' .env
+                sed -i 's/database_password_here/${DbPassword}/g' .env
+                sed -i 's/database_host_here/${DbHost}/g' .env
+                sed -i 's/database_port_here/3306/g' .env
+                sed -i 's/database_name_here/${DbName}/g' .env
+                sed -i 's/environment_here/prod/g' .env
+                rm -rf src/DataFixtures/AppFixtures.php
+                chown -R nginx:nginx /var/log/nginx
+        cfn_add_environment_config:
+          commands:
+            01_run_script:
+              cwd: /var/www/html/cottect
+              command: "sudo /tmp/update-environment"
+        cfn_create_database:
+          commands:
+            01_update_table:
+              cwd: /var/www/html/cottect
+              command: "php bin/console doctrine:schema:update --force"
+        cfn_setup_uploads_efs:
+          commands:
+            01_make_mount_dir:
+              cwd: /var/www/html
+              command: !Sub "mkdir -p ${EfsMountPoint}"
+            02_update_fstab:
+              cwd: /var/www/html
+              command: !Sub |
+                echo "${EfsFileSystemId}.efs.${AWS::Region}.amazonaws.com:/ ${EfsMountPoint} nfs4 nfsvers=4.1,rsize=1048576,wsize=1048576,hard,timeo=600,retrans=2 0 0" >> /etc/fstab
+            03_mount_efs:
+              command: "mount -a -t nfs4"
+        cfn_config_cottect:
+          files:
+            "/etc/nginx/conf.d/cottect.conf":
+              content: !Sub |
+                server {
+                  listen 80;
+                  server_name ${RecordName};
+                  root /var/www/html/cottect/public;
+
+                  index index.php;
+
+                  error_log  /var/log/nginx/cottect_access.log;
+                  access_log /var/log/nginx/cottect_error.log;
+
+                  location / {
+                    try_files $uri /index.php$is_args$args;
+                  }
+
+                  location ~ .php(/|$) {
+                    fastcgi_split_path_info ^(.+\.php)(/.*)$;
+                    fastcgi_pass unix:/var/run/php-fpm/www.sock;
+                    include fastcgi_params;
+                    fastcgi_param SCRIPT_FILENAME $realpath_root$fastcgi_script_name;
+                    fastcgi_param DOCUMENT_ROOT $realpath_root;
+                  }
+
+                  location ~ \.php$ {
+                    return 404;
+                  }
+                }
+        cfn_start_services:
+          commands:
+            01_start_php_fpm:
+              command: "sudo service php-fpm start"
+            02_start_nginx:
+              command: "sudo service nginx start"
+            03_onboot_php_fpm:
+              command: "sudo chkconfig nginx on"
+            04_onboot_nginx:
+              command: "sudo chkconfig php-fpm on"
+        cfn_dns_update_script:
+          files:
+            "/tmp/update-dns":
+              mode: '000777'
+              content: !Sub |
+                #!/bin/bash
+
+                cat <<EOF > /tmp/route53-upsert.json
+                {
+                  "Comment": "string",
+                  "Changes": [
+                    {
+                      "Action": "UPSERT",
+                      "ResourceRecordSet": {
+                        "Name": "${RecordName}",
+                        "Type": "A",
+                        "TTL": 60,
+                        "ResourceRecords": [
+                          {
+                            "Value": "$(curl http://169.254.169.254/latest/meta-data/public-ipv4/)"
+                          }
+                        ]
+                      }
+                    }
+                  ]
+                }
+                EOF
+
+                aws route53 change-resource-record-sets --hosted-zone-id "${HostedZoneId}" --change-batch "file:///tmp/route53-upsert.json"
+        cfn_update_dns:
+          commands:
+            01_run_script:
+              command: "sudo /tmp/update-dns"
+      CreationPolicy:
+        ResourceSignal:
+          Count: 1
+          Timeout: PT20M
+
+Outputs:
+  # Network
+  VPC:
+    Value: !Ref VPC
+  SubnetId:
+    Value: !Ref SubnetId
+  SecurityGroup:
+    Value: !Ref SecurityGroup
+  InternalAccessSecurityGroup:
+    Value: !Ref InternalAccessSecurityGroup
+  RemoteSecurityGroup:
+    Value: !Ref RemoteSecurityGroup
+  RdsSecurityGroup:
+    Value: !Ref RdsSecurityGroup
+  EfsSecurityGroup:
+    Value: !Ref EfsSecurityGroup
+  InstanceURL:
+    Value: !Join [ "", [ "http://", !GetAtt EC2Instance.PrivateDnsName ] ]
+  DnsURL:
+    Value: !Join [ "", [ "http://", !Ref RecordName ] ]
+
+  # Instance Settings
+  AMI:
+    Description: AMI Used.
+    Value: !FindInMap [ RegionMap, !Ref "AWS::Region", EBS ]
+  InstanceType:
+    Description: Instance Type Used.
+    Value: !Ref InstanceType
+  KeyPairName:
+    Description: Key Pair Name Used.
+    Value: !Ref KeyPairName
+  IAMRole:
+    Description: IAM Instance Profile Role Created.
+    Value: !Ref IamRole
+
+  # DNS
+  RecordName:
+    Description: Record Name.
+    Value: !Ref RecordName
+  HostedZoneId:
+    Description: Hosted Zone ID.
+    Value: !Ref HostedZoneId
