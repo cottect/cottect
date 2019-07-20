@@ -16,9 +16,9 @@ interface UserRegisterServiceInterface
     public function setRegisterRequest(UserRegisterFrontendRequest $request);
 
     /**
-     * @throws \Doctrine\ORM\ORMException
-     * @throws \Doctrine\ORM\OptimisticLockException
      * @return User
+     * @throws \Doctrine\ORM\OptimisticLockException
+     * @throws \Doctrine\ORM\ORMException
      */
     public function submit();
 }

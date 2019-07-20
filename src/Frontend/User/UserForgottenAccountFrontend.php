@@ -9,14 +9,12 @@
 namespace Cottect\Frontend\User;
 
 use Cottect\Form\Frontend\User\UserCheckpointFrontendForm;
-use Cottect\Form\Frontend\User\UserLoginFrontendForm;
 use Cottect\Frontend\GuestFrontend;
-use Cottect\Utils\Template;
-use Symfony\Component\HttpFoundation\Response;
-
-use Symfony\Component\Routing\Annotation\Route;
 use Cottect\Utils\RouteName;
 use Cottect\Utils\RoutePath;
+use Cottect\Utils\Template;
+use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\Routing\Annotation\Route;
 
 class UserForgottenAccountFrontend extends GuestFrontend
 {

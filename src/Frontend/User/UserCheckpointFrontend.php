@@ -13,6 +13,8 @@ use Cottect\Frontend\AuthenticationFrontend;
 use Cottect\Services\User\UserCheckpointService;
 use Cottect\Services\User\UserRegisterFactoryService;
 use Cottect\Utils\Country;
+use Cottect\Utils\RouteName;
+use Cottect\Utils\RoutePath;
 use Cottect\Utils\Session;
 use Cottect\Utils\Template;
 use Doctrine\ORM\OptimisticLockException;
@@ -22,8 +24,6 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Intl\Intl;
 use Symfony\Component\Routing\Annotation\Route;
-use Cottect\Utils\RouteName;
-use Cottect\Utils\RoutePath;
 
 class UserCheckpointFrontend extends AuthenticationFrontend
 {

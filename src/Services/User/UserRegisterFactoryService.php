@@ -45,7 +45,8 @@ class UserRegisterFactoryService
         UserRegisterByPhoneService $registerByPhoneService,
         UserRegisterByEmailService $registerByEmailService,
         Detect $detect
-    ) {
+    )
+    {
         $this->registerByPhoneService = $registerByPhoneService;
         $this->registerByEmailService = $registerByEmailService;
         $this->detect = $detect;

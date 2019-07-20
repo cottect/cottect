@@ -12,8 +12,8 @@
 namespace Cottect\Repository;
 
 use Cottect\Entity\User;
-use Doctrine\ORM\Mapping;
 use Doctrine\ORM\EntityRepository;
+use Doctrine\ORM\Mapping;
 use Symfony\Bridge\Doctrine\Security\User\UserLoaderInterface;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
 

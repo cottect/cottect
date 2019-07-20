@@ -38,7 +38,7 @@ class Detect
 
     public function isPhone()
     {
-        $data = str_replace(['-', '.', ' ','+'], '', $this->data);
+        $data = str_replace(['-', '.', ' ', '+'], '', $this->data);
         if (preg_match('/^(01[2689]|09)[0-9]{8}$/', $data)) {
             return true;
         }

@@ -3,18 +3,17 @@
 namespace Cottect\Form\Frontend\User;
 
 use Cottect\Entity\User;
-use Cottect\Frontend\User\UserRegisterFrontend;
 use Cottect\Http\Request\Frontend\User\UserRegisterFrontendRequest;
 use Cottect\Utils\Date;
 use Cottect\Utils\RouteName;
 use Symfony\Component\Form\AbstractType;
 use Symfony\Component\Form\Extension\Core\Type\BirthdayType;
 use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\PasswordType;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\OptionsResolver\OptionsResolver;
-use Symfony\Component\Form\Extension\Core\Type\TextType;
-use Symfony\Component\Form\Extension\Core\Type\PasswordType;
 use Symfony\Component\Routing\RouterInterface;
 use Symfony\Component\Translation\TranslatorInterface;
 

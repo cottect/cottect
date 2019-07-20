@@ -4,8 +4,8 @@ namespace Cottect\Form\Frontend\User;
 
 use Cottect\Http\Request\Frontend\User\UserCheckpointFrontendRequest;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\OptionsResolver\OptionsResolver;
 
 class UserCheckpointFrontendForm extends AbstractType

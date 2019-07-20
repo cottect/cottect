@@ -9,7 +9,6 @@
 namespace Cottect\Services\User;
 
 use Cottect\Entity\User;
-use Cottect\Http\Response;
 use Cottect\Repository\UserRepository;
 use Cottect\Utils\Detect;
 use Doctrine\ORM\EntityManagerInterface;
@@ -32,7 +31,8 @@ class UserCheckpointService
         Detect $detect,
         EntityManagerInterface $entityManager,
         UserPasswordEncoderInterface $passwordEncoder
-    ) {
+    )
+    {
         $this->detect = $detect;
         $this->userRepository = $entityManager->getRepository(User::class);
         $this->passwordEncoder = $passwordEncoder;

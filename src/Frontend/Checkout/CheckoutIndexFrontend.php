@@ -3,11 +3,10 @@
 namespace Cottect\Frontend\Checkout;
 
 use Cottect\Frontend\AuthenticationFrontend;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Symfony\Component\Routing\Annotation\Route;
 use Cottect\Utils\RouteName;
 use Cottect\Utils\RoutePath;
 use Cottect\Utils\Template;
+use Symfony\Component\Routing\Annotation\Route;
 
 class CheckoutIndexFrontend extends AuthenticationFrontend
 {

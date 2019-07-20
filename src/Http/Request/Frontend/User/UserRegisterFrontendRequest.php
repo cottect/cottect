@@ -9,8 +9,8 @@
 namespace Cottect\Http\Request\Frontend\User;
 
 use Cottect\Http\Request;
-use Symfony\Component\Validator\Constraints as Assert;
 use Cottect\Validator\Constraints as CottectAssert;
+use Symfony\Component\Validator\Constraints as Assert;
 
 class UserRegisterFrontendRequest extends Request
 {

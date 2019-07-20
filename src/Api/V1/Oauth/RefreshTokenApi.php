@@ -35,7 +35,8 @@ class RefreshTokenApi extends GrantTypeRefreshTokenApi
         RefreshTokenApiResponse $refreshTokenApiResponse,
         OauthTokenService $tokenService,
         OauthRefreshOauthTokenService $refreshTokenService
-    ) {
+    )
+    {
         # Handle error
         $errors = $this->initial($request, $refreshTokenApiRequest);
         if ($errors) {

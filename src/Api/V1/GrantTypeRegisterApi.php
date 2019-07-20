@@ -8,10 +8,6 @@
 
 namespace Cottect\Api\V1;
 
-use Cottect\Http\ApiRequestInterface;
-use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\Validator\Validator\ValidatorInterface;
-
 abstract class GrantTypeRegisterApi extends GrantTypeApi
 {
 

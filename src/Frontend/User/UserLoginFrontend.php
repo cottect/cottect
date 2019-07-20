@@ -8,9 +8,9 @@
 
 namespace Cottect\Frontend\User;
 
+use Cottect\Entity\User;
 use Cottect\Form\Frontend\User\UserLoginFrontendForm;
 use Cottect\Frontend\GuestFrontend;
-use Cottect\Entity\User;
 use Cottect\Http\Request\Frontend\User\UserLoginFrontendRequest;
 use Cottect\Services\User\UserLoginService;
 use Cottect\Utils\RouteName;
@@ -43,7 +43,8 @@ class UserLoginFrontend extends GuestFrontend
         UserLoginService $loginService,
         Session $session,
         TranslatorInterface $translator
-    ): Response {
+    ): Response
+    {
         $form = $this->createForm(UserLoginFrontendForm::class, $loginRequest);
         $form->handleRequest($request);
 
