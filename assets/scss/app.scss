@@ -15,6 +15,7 @@ $web-font-path: 'data:text/css;base64,';
 @import "articleItemHorizontal.scss";
 @import "blockquote.scss";
 @import "form.scss";
+@import "pricing.scss";
 
 // pick the Lato fonts individually to avoid importing the entire font family
 @import '~lato-font/scss/public-api';
@@ -194,6 +195,7 @@ li.list-group-item.d-flex.justify-content-between.align-items-center {
   border-top-right-radius: .25rem;
   border: 1px solid rgba(0, 0, 0, 0.125);
   border-bottom: 0;
+
   img {
     width: 100%;
     height: auto;
@@ -701,7 +703,16 @@ form#form-search .input-group-text {
 
 .custom-file-label::after,
 .custom-file-label {
-  line-height: 1.75;
+  line-height: 1.5;
+}
+
+.custom-file-label {
+  height: 2.4em;
+  font-size: 1rem;
+}
+
+.custom-file-label::after {
+  height: calc(2.4em - 2px);
 }
 
 #textEditor.nav-tabs {

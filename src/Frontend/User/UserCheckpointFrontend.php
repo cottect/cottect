@@ -15,7 +15,11 @@ use Cottect\Services\User\UserRegisterFactoryService;
 use Cottect\Utils\Country;
 use Cottect\Utils\Session;
 use Cottect\Utils\Template;
+use Doctrine\ORM\OptimisticLockException;
+use Doctrine\ORM\ORMException;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Intl\Intl;
 use Symfony\Component\Routing\Annotation\Route;
 use Cottect\Utils\RouteName;
@@ -30,9 +34,9 @@ class UserCheckpointFrontend extends AuthenticationFrontend
      * @param Session $session
      * @param UserCheckpointService $userCheckpointService
      *
-     * @return \Symfony\Component\HttpFoundation\RedirectResponse|\Symfony\Component\HttpFoundation\Response
-     * @throws \Doctrine\ORM\ORMException
-     * @throws \Doctrine\ORM\OptimisticLockException
+     * @return RedirectResponse|Response
+     * @throws ORMException
+     * @throws OptimisticLockException
      */
     public function index(Request $request, Session $session, UserCheckpointService $userCheckpointService)
     {

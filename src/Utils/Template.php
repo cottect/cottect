@@ -36,4 +36,6 @@ class Template
 
     const FRONTEND_MANAGE_INDEX = 'frontend/manage/index.html.twig';
 
+    const FRONTEND_PRICING_INDEX =  'frontend/pricing/index.html.twig';
+
 }
