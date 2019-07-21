@@ -12,10 +12,6 @@ import 'chart.js/dist/Chart.min.css';
 
 import 'startbootstrap-sb-admin-2/js/sb-admin-2.min';
 
-import 'startbootstrap-sb-admin-2/js/demo/datatables-demo';
-import 'startbootstrap-sb-admin-2/js/demo/chart-area-demo';
-import 'startbootstrap-sb-admin-2/js/demo/chart-bar-demo';
-import 'startbootstrap-sb-admin-2/js/demo/chart-pie-demo';
 
 // loads the code syntax highlighting library
 import './highlight.js';

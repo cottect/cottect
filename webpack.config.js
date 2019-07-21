@@ -15,6 +15,11 @@ Encore
     .addEntry('js/search', './assets/js/search.js')
     .addEntry('js/chat-box', './assets/js/chat-box.js')
     .addEntry('js/textEditor', './assets/js/textEditor.js')
+    .addEntry('js/datatables-demo', './assets/js/datatables-demo.js')
+    .addEntry('js/chart-area-demo', './assets/js/chart-area-demo.js')
+    .addEntry('js/chart-bar-demo', './assets/js/chart-bar-demo.js')
+    .addEntry('js/chart-pie-demo', './assets/js/chart-pie-demo.js')
+
     .addStyleEntry('css/app', ['./assets/scss/app.scss'])
     .autoProvideVariables({
         "window.Bloodhound": require.resolve('bloodhound-js'),
