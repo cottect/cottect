@@ -43,7 +43,8 @@ class OauthTokenService
     public function __construct(
         UserService $userService,
         OauthClientService $oauthClientService
-    ) {
+    )
+    {
         $this->userService = $userService;
         $this->oauthClientService = $oauthClientService;
     }

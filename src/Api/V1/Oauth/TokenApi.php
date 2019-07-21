@@ -8,8 +8,8 @@
 
 namespace Cottect\Api\V1\Oauth;
 
-use Cottect\Entity\User;
 use Cottect\Api\V1\GrantTypePasswordApi;
+use Cottect\Entity\User;
 use Cottect\Http\Request\Api\Oauth\TokenApiRequest;
 use Cottect\Http\Response;
 use Cottect\Http\Response\Api\Oauth\TokenApiResponse;
@@ -41,7 +41,8 @@ class TokenApi extends GrantTypePasswordApi
         TokenApiResponse $tokenApiResponse,
         OauthTokenService $tokenService,
         OauthRefreshOauthTokenService $refreshTokenService
-    ) {
+    )
+    {
         # Handle error
         $errors = $this->initial($request, $tokenApiRequest);
         if ($errors) {

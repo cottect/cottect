@@ -8,16 +8,15 @@
 
 namespace Cottect\Api\V1;
 
+use Cottect\Http\ApiRequestInterface;
 use Cottect\Http\RequestInterface;
+use Cottect\Http\Response;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Validator\ConstraintViolation;
 use Symfony\Component\Validator\ConstraintViolationList;
 use Symfony\Component\Validator\Validator\ValidatorInterface;
-use Cottect\Http\ApiRequestInterface;
-use Cottect\Http\Response;
-use Symfony\Component\Routing\Annotation\Route;
 
 /**
  * Class Api

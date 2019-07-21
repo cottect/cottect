@@ -1,0 +1,14 @@
+#wrapper {
+  #content-wrapper {
+    background-color: transparent;
+  }
+
+  .sidebar #sidebarToggle::after,
+  .sidebar .nav-item .nav-link[data-toggle="collapse"]::after {
+    font: normal normal normal 14px/1 FontAwesome;
+  }
+
+  .sidebar #sidebarToggle::after {
+    content: "\f053";
+  }
+}

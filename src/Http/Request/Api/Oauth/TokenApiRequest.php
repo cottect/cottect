@@ -8,10 +8,9 @@
 
 namespace Cottect\Http\Request\Api\Oauth;
 
-use Cottect\Http\ApiRequest;
 use Cottect\Http\OauthApiRequest;
-use Symfony\Component\Validator\Constraints as Assert;
 use Cottect\Validator\Constraints as CottectAssert;
+use Symfony\Component\Validator\Constraints as Assert;
 
 class TokenApiRequest extends OauthApiRequest
 {

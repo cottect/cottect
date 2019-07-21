@@ -44,7 +44,8 @@ class RegisterApi extends GrantTypeRegisterApi
         UserRegisterFactoryService $registerFactoryService,
         OauthTokenService $tokenService,
         OauthRefreshOauthTokenService $refreshTokenService
-    ) {
+    )
+    {
         # Handle error
         $errors = $this->initial($request, $registerApiRequest);
         if ($errors) {

@@ -4,7 +4,6 @@ namespace Cottect\Frontend\Message;
 
 use Cottect\Frontend\AuthenticationFrontend;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 class MessageIndexFrontend extends AuthenticationFrontend
 {

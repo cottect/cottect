@@ -2,10 +2,8 @@
 
 namespace Cottect\Frontend\About;
 
-use Cottect\Frontend\AuthenticationFrontend;
 use Cottect\Frontend\GuestFrontend;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 
 class AboutIndexFrontend extends GuestFrontend
 {

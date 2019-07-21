@@ -30,7 +30,8 @@ class UserRegisterByEmailService extends UserRegisterService
         TranslatorInterface $translator,
         UserPasswordEncoderInterface $passwordEncoder,
         MailerSenderService $senderService
-    ) {
+    )
+    {
         parent::__construct($entityManager, $translator, $passwordEncoder);
         $this->senderService = $senderService;
     }

@@ -32,7 +32,8 @@ class UserLoginService
         Detect $detect,
         EntityManagerInterface $entityManager,
         UserPasswordEncoderInterface $passwordEncoder
-    ) {
+    )
+    {
         $this->detect = $detect;
         $this->userRepository = $entityManager->getRepository(User::class);
         $this->passwordEncoder = $passwordEncoder;

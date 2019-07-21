@@ -26,7 +26,8 @@ class UsernameValidator extends ConstraintValidator
         TranslatorInterface $translator,
         Username $username,
         Detect $detect
-    ) {
+    )
+    {
         $this->username = $username;
         $this->detect = $detect;
         $this->translator = $translator;

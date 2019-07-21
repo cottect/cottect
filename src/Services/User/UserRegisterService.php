@@ -40,7 +40,8 @@ abstract class UserRegisterService implements UserRegisterServiceInterface
         EntityManagerInterface $entityManager,
         TranslatorInterface $translator,
         UserPasswordEncoderInterface $passwordEncoder
-    ) {
+    )
+    {
         $this->userRepository = $entityManager->getRepository(User::class);
         $this->translator = $translator;
         $this->userRepository->setPasswordEncoder($passwordEncoder);

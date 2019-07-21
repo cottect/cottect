@@ -14,11 +14,11 @@ use Cottect\Exception\UnauthenticatedException;
 use Cottect\Exception\UnverifiedException;
 use Cottect\Utils\RouteName;
 use Symfony\Component\HttpFoundation\JsonResponse;
-use Symfony\Component\HttpKernel\Event\GetResponseForExceptionEvent;
+use Symfony\Component\HttpFoundation\RedirectResponse;
 use Symfony\Component\HttpFoundation\Response;
+use Symfony\Component\HttpKernel\Event\GetResponseForExceptionEvent;
 use Symfony\Component\HttpKernel\Exception\HttpExceptionInterface;
 use Symfony\Component\Routing\RouterInterface;
-use Symfony\Component\HttpFoundation\RedirectResponse;
 
 class ExceptionListener
 {

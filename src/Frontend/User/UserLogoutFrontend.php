@@ -10,10 +10,10 @@ namespace Cottect\Frontend\User;
 
 use Cottect\Form\Frontend\User\UserLogoutFrontendForm;
 use Cottect\Frontend\AuthenticationFrontend;
-use Cottect\Utils\Session;
-use Symfony\Component\HttpFoundation\Request;
 use Cottect\Utils\RouteName;
 use Cottect\Utils\RoutePath;
+use Cottect\Utils\Session;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 
 class UserLogoutFrontend extends AuthenticationFrontend

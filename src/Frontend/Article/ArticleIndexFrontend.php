@@ -3,11 +3,10 @@
 namespace Cottect\Frontend\Article;
 
 use Cottect\Frontend\AuthenticationFrontend;
-use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Cottect\Utils\RouteName;
 use Cottect\Utils\RoutePath;
 use Cottect\Utils\Template;
+use Symfony\Component\Routing\Annotation\Route;
 
 class ArticleIndexFrontend extends AuthenticationFrontend
 {

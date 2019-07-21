@@ -33,7 +33,8 @@ class UserRegisterByPhoneService extends UserRegisterService
         TranslatorInterface $translator,
         UserPasswordEncoderInterface $passwordEncoder,
         SmsSenderService $senderService
-    ) {
+    )
+    {
         parent::__construct($entityManager, $translator, $passwordEncoder);
         $this->senderService = $senderService;
     }

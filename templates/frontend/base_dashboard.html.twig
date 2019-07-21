@@ -27,41 +27,43 @@
             </div>
         </div>
     {% endblock %}
-    <div id="dashboard-main" class="container-fluid pl-0">
-        {% block main_dashboard %}
-            {% block before_body_dashboard %}
-            {% endblock %}
-            <div class="row mr-0 ml-0">
-                <div class="col-md-10 pr-0">
-                    {% block body_dashboard_outer_row %}
-                    <div class="row">
-                        {% block body_dashboard %}
-                            <div class="col-md-3 mb-5 mt-3">
-                                <div class="card mb-3">
-                                    {% include 'frontend/_modules/_profile.html.twig' %}
-                                </div>
-                                <div class="card">
-                                    {% include 'frontend/_modules/_quote.html.twig' %}
-                                </div>
-                            </div>
-                            <div class="col-md-9 pl-0 mb-5 mt-3 main">
-                                {% block body_main_dashboard %}
-                                    {% include 'frontend/_modules/_cover.html.twig' %}
-                                    {% block body_data_dashboard %}
-                                    {% endblock %}
+    {% block main_dashboard_outer %}
+        <div id="dashboard-main" class="container-fluid pl-0">
+            {% block main_dashboard %}
+                {% block before_body_dashboard %}
+                {% endblock %}
+                <div class="row mr-0 ml-0">
+                    <div class="col-md-10 pr-0">
+                        {% block body_dashboard_outer_row %}
+                            <div class="row">
+                                {% block body_dashboard %}
+                                    <div class="col-md-3 mb-5 mt-3">
+                                        <div class="card mb-3">
+                                            {% include 'frontend/_modules/_profile.html.twig' %}
+                                        </div>
+                                        <div class="card">
+                                            {% include 'frontend/_modules/_quote.html.twig' %}
+                                        </div>
+                                    </div>
+                                    <div class="col-md-9 pl-0 mb-5 mt-3 main">
+                                        {% block body_main_dashboard %}
+                                            {% include 'frontend/_modules/_cover.html.twig' %}
+                                            {% block body_data_dashboard %}
+                                            {% endblock %}
+                                        {% endblock %}
+                                    </div>
                                 {% endblock %}
                             </div>
                         {% endblock %}
                     </div>
-                    {% endblock %}
+                    <div class="col-md-2">
+                        {% include 'frontend/_modules/_chat.html.twig' %}
+                        {% include 'frontend/_modules/_modal_images.html.twig' %}
+                    </div>
                 </div>
-                <div class="col-md-2">
-                    {% include 'frontend/_modules/_chat.html.twig' %}
-                    {% include 'frontend/_modules/_modal_images.html.twig' %}
-                </div>
-            </div>
-        {% endblock %}
-    </div>
+            {% endblock %}
+        </div>
+    {% endblock %}
 {% endblock %}
 
 {% block footer %}

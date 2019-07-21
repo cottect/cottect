@@ -10,7 +10,7 @@ namespace Cottect\Services\Oauth;
 
 class OauthRefreshOauthTokenService extends OauthTokenService
 {
-    const EXPIRES_IN = 2592000 ; // Valid for 1 month
+    const EXPIRES_IN = 2592000; // Valid for 1 month
 
     protected function getTokenData($userId, $clientId, $scope = [])
     {

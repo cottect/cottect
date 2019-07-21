@@ -20,7 +20,8 @@ class PageCreateService
 
     public function __construct(
         EntityManagerInterface $entityManager
-    ) {
+    )
+    {
         $this->pageRepository = $entityManager->getRepository(Page::class);
     }
 

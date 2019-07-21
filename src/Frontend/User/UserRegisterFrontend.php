@@ -13,13 +13,12 @@ use Cottect\Frontend\GuestFrontend;
 use Cottect\Http\Request\Frontend\User\UserRegisterFrontendRequest;
 use Cottect\Services\Page\PageCreateService;
 use Cottect\Services\User\UserRegisterFactoryService;
-use Cottect\Utils\Session;
-use Cottect\Utils\Template;
 use Cottect\Utils\RouteName;
 use Cottect\Utils\RoutePath;
+use Cottect\Utils\Session;
+use Cottect\Utils\Template;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
-use Symfony\Component\HttpFoundation\Session\SessionInterface;
 use Symfony\Component\Routing\Annotation\Route;
 
 class UserRegisterFrontend extends GuestFrontend
@@ -43,7 +42,8 @@ class UserRegisterFrontend extends GuestFrontend
         UserRegisterFactoryService $registerFactoryService,
         PageCreateService $pageCreateService,
         Session $session
-    ) {
+    )
+    {
         $form = $this->createForm(UserRegisterFrontendForm::class, $registerRequest);
 
         $form->handleRequest($request);
