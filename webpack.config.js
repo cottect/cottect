@@ -15,6 +15,7 @@ Encore
     .addEntry('js/search', './assets/js/search.js')
     .addEntry('js/chat-box', './assets/js/chat-box.js')
     .addEntry('js/textEditor', './assets/js/textEditor.js')
+    .addStyleEntry('css/app', ['./assets/scss/app.scss'])
     .autoProvideVariables({
         "window.Bloodhound": require.resolve('bloodhound-js'),
         "jQuery.tagsinput": "bootstrap-tagsinput",
