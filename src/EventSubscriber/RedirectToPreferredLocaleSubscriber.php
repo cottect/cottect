@@ -26,8 +26,8 @@ class RedirectToPreferredLocaleSubscriber implements EventSubscriberInterface
      * RedirectToPreferredLocaleSubscriber constructor.
      *
      * @param UrlGeneratorInterface $urlGenerator
-     * @param string $locales
-     * @param string|null $defaultLocale
+     * @param string                $locales
+     * @param string|null           $defaultLocale
      */
     public function __construct(UrlGeneratorInterface $urlGenerator, string $locales, string $defaultLocale = null)
     {

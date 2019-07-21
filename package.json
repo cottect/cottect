@@ -21,6 +21,7 @@
     "build": "./node_modules/.bin/encore production"
   },
   "dependencies": {
+    "@fortawesome/fontawesome-free": "^5.9.0",
     "blueimp-file-upload": "^9.21.0",
     "bootstrap": "^4.0.0",
     "cropit": "^0.5.1",
@@ -33,6 +34,7 @@
     "medium-editor-insert-plugin": "^2.5.0",
     "moment": "^2.21.0",
     "moment-timezone": "^0.5.14",
-    "popper.js": "^1.12.9"
+    "popper.js": "^1.12.9",
+    "startbootstrap-sb-admin-2": "^4.0.6"
   }
 }

@@ -9,6 +9,8 @@
     {% endblock %}
 
     <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}"/>
+    {% block head_add %}
+    {% endblock %}
 </head>
 <body id="{% block body_id %}{% endblock %}">
 {% block header %}
@@ -30,13 +32,7 @@
                             <a class="nav-link" href="{{ path('blog_index') }}">Blog</a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="/videos">Videos</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="/success-stories">Success stories</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link" href="/guides">Guides</a>
+                            <a class="nav-link" href="{{ path('features_index_frontend') }}">Features</a>
                         </li>
                     </ul>
                     <ul class="list-unstyled my-2 my-lg-0">

@@ -51,6 +51,7 @@ section.pricing {
 /* Hover Effects on Card */
 
 @media (min-width: 992px) {
+  .pricing .card.active,
   .pricing .card:hover {
     margin-top: -.25rem;
     margin-bottom: .25rem;

@@ -1,16 +1,16 @@
 <?php
 
-namespace Cottect\Frontend\Blog;
+namespace Cottect\Frontend\Features;
 
 
 use Cottect\Frontend\GuestFrontend;
 use Cottect\Utils\Template;
 use Symfony\Component\Routing\Annotation\Route;
 
-class BlogIndexFrontend extends GuestFrontend
+class FeatureIndexFrontend extends GuestFrontend
 {
     /**
-     * @Route("/blog", name="blog_index")
+     * @Route("/features", name="features_index_frontend")
      */
     public function index()
     {

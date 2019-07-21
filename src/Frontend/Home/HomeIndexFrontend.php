@@ -7,6 +7,7 @@ use Cottect\Frontend\GuestFrontend;
 use Cottect\Utils\RouteName;
 use Cottect\Utils\RoutePath;
 use Cottect\Utils\Template;
+use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -17,7 +18,7 @@ class HomeIndexFrontend extends GuestFrontend
      *
      * @return Response
      */
-    public function index()
+    public function index(Request $request)
     {
         $form = $this->createForm(UserRegisterFrontendForm::class);
 

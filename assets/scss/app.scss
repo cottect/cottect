@@ -4,11 +4,12 @@
 $web-font-path: 'data:text/css;base64,';
 
 @import "~bootstrap/scss/bootstrap";
-@import "~font-awesome/scss/font-awesome.scss";
 @import "~highlight.js/styles/solarized-light.css";
 @import "~medium-editor/src/sass/medium-editor";
 @import "~medium-editor/src/sass/themes/beagle";
 @import "~medium-editor-insert-plugin/src/sass/medium-editor-insert-plugin";
+@import "~startbootstrap-sb-admin-2/scss/sb-admin-2";
+@import "~font-awesome/scss/font-awesome.scss";
 
 @import "textEditor.scss";
 @import "blockUpDownVote.scss";
@@ -16,6 +17,7 @@ $web-font-path: 'data:text/css;base64,';
 @import "blockquote.scss";
 @import "form.scss";
 @import "pricing.scss";
+@import "manage.scss";
 
 // pick the Lato fonts individually to avoid importing the entire font family
 @import '~lato-font/scss/public-api';
