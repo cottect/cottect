@@ -6,31 +6,18 @@
 {% endblock %}
 
 {% block body %}
-    {% block body_nav_utils %}
-        <div id="nav-utils" class="bg-light row m-0">
-            <div class="col-md-12 p-0">
-                <nav class="nav nav-pills flex-column flex-sm-row bg-light pl-3 pr-3 pb-2 pt-2">
-                    <a class="text-sm-center nav-link active" href="{{ path('frontend_dashboard_index') }}">Hot</a>
-                    <a class="text-sm-center nav-link" href="{{ path('frontend_dashboard_index') }}">New</a>
-                    <a class="text-sm-center nav-link" href="{{ path('frontend_dashboard_index') }}">Rising</a>
-                    <a class="text-sm-center nav-link disabled" href="#">Wiki</a>
-                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
-                        <div class="navbar-nav mr-auto">
-                            <form class="form-inline">
-                                <input class="form-control mr-sm-2" type="search" placeholder="Search"
-                                       aria-label="Search">
-                                <button class="btn btn-outline-success my-2 my-sm-0" type="submit">Search</button>
-                            </form>
-                        </div>
-                    </div>
-                </nav>
-            </div>
-        </div>
-    {% endblock %}
     {% block main_dashboard_outer %}
         <div id="dashboard-main" class="container-fluid pl-0">
             {% block main_dashboard %}
                 {% block before_body_dashboard %}
+                {% endblock %}
+                {% block body_nav_utils %}
+                <div class="row m-0 p-0 bg-light nav-utils">
+                    <div class="col-md-10 m-0 p-0">
+                            {% include 'frontend/_modules/_sub_nav.html.twig' %}
+                    </div>
+                    <div class="col-md-2 m-0 p-0"></div>
+                </div>
                 {% endblock %}
                 <div class="row mr-0 ml-0">
                     <div class="col-md-10 pr-0">
