@@ -772,27 +772,6 @@ div#user_register_frontend_form_birthday .form-control {
   }
 }
 
-@media (max-width: 990px) {
-  #dashboardHeader form#form-search {
-    padding-top: 1rem;
-  }
-
-  #dashboardHeader .tool-groups {
-    padding: 1rem 0;
-  }
-}
-
-@media (max-width: 719px) {
-  .card-columns {
-    -webkit-column-count: 1;
-    column-count: 1;
-  }
-
-  #globalFooter .pl-0, .main.pl-0 {
-    padding-left: 15px !important;
-  }
-}
-
 @media (max-width: 1199px) {
   footer#dashboardFooter {
     padding-right: 15px;
@@ -810,6 +789,56 @@ div#user_register_frontend_form_birthday .form-control {
     padding-right: 15px;
   }
 }
+
+@media (max-width: 990px) {
+  #dashboardHeader form#form-search {
+    padding-top: 1rem;
+  }
+
+  #dashboardHeader .tool-groups {
+    padding: 1rem 0;
+  }
+  .nav-utils {
+    display: none;
+  }
+}
+
+@media (max-width: 719px) {
+  .card-columns {
+    -webkit-column-count: 1;
+    column-count: 1;
+  }
+
+  #globalFooter .pl-0, .main.pl-0 {
+    padding-left: 15px !important;
+  }
+  nav#dashboardHeader {
+    position: initial;
+    padding: 0 0 0.5rem;
+
+    .navbar-toggler {
+      margin-top: 0.5rem;
+      margin-right: 1rem;
+    }
+
+    .navbar-brand {
+      margin-top: 0.5rem;
+      margin-left: 1rem;
+    }
+  }
+  div#navbarsExampleDefault {
+    background: $primary-color;
+    padding: 0 1rem 0.5rem;
+    z-index: 9999;
+  }
+
+
+  .article-main {
+    margin-bottom: 0.5rem;
+  }
+
+}
+
 
 @media (max-width: 480px) {
   nav#dashboardHeader form#form-search .form-control {
