@@ -3,6 +3,8 @@ Cottect
 
 [Cottect](https://cottect.com) is a Content Management System (CMS) and web platform.
 
+Created by [Bang Dinh](https://github.com/dinhnhatbang) and maintained with ❤️ by an amazing team of developers.
+
 
 ### Installation
 
