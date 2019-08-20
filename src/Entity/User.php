@@ -2,8 +2,10 @@
 
 namespace Cottect\Entity;
 
+use DateTime;
 use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\ORM\Mapping as ORM;
+use Exception;
 use Symfony\Component\Security\Core\User\UserInterface;
 
 /**
@@ -66,7 +68,7 @@ class User implements UserInterface
     protected $lastName;
 
     /**
-     * @var \DateTime
+     * @var DateTime
      * @ORM\Column(type="date", nullable=false, options={"comment":"yyyy-MM-dd"})
      */
     protected $birthday;
@@ -102,25 +104,25 @@ class User implements UserInterface
     protected $verifiedBy;
 
     /**
-     * @var \DateTime
+     * @var DateTime
      * @ORM\Column(type="datetime", nullable=true)
      */
     protected $verified;
 
     /**
-     * @var \DateTime
+     * @var DateTime
      * @ORM\Column(type="datetime", nullable=true)
      */
     protected $created;
 
     /**
-     * @var \DateTime
+     * @var DateTime
      * @ORM\Column(type="datetime", nullable=true)
      */
     protected $updated;
 
     /**
-     * @var \DateTime
+     * @var DateTime
      * @ORM\Column(type="datetime", nullable=true)
      */
     protected $deleted;
@@ -276,22 +278,22 @@ class User implements UserInterface
     }
 
     /**
-     * @return \DateTime
+     * @return DateTime
      */
-    public function getBirthday(): \DateTime
+    public function getBirthday(): DateTime
     {
         return $this->birthday;
     }
 
     /**
-     * @param string|\DateTime $birthday
+     * @param string|DateTime $birthday
      */
     public function setBirthday($birthday): void
     {
-        if ($birthday instanceof \DateTime) {
+        if ($birthday instanceof DateTime) {
             $this->birthday = $birthday;
         } else {
-            $birthdayDatetime = \DateTime::createFromFormat('Y-m-d', $birthday);
+            $birthdayDatetime = DateTime::createFromFormat('Y-m-d', $birthday);
             $this->birthday = $birthdayDatetime;
         }
     }
@@ -345,7 +347,7 @@ class User implements UserInterface
     }
 
     /**
-     * @return \DateTime | null
+     * @return DateTime | null
      */
     public function getVerified()
     {
@@ -353,17 +355,17 @@ class User implements UserInterface
     }
 
     /**
-     * @param \DateTime $verified
+     * @param DateTime $verified
      */
-    public function setVerified(\DateTime $verified): void
+    public function setVerified(DateTime $verified): void
     {
         $this->verified = $verified;
     }
 
     /**
-     * @return \DateTime
+     * @return DateTime
      */
-    public function getCreated(): \DateTime
+    public function getCreated(): DateTime
     {
         return $this->created;
     }
@@ -372,18 +374,19 @@ class User implements UserInterface
      * @ORM\PrePersist
      *
      * @return $this
+     * @throws Exception
      */
     public function setCreated()
     {
-        $this->created = new \DateTime();
+        $this->created = new DateTime();
 
         return $this;
     }
 
     /**
-     * @return \DateTime|null
+     * @return DateTime|null
      */
-    public function getUpdated(): ?\DateTime
+    public function getUpdated(): ?DateTime
     {
         return $this->updated;
     }
@@ -392,18 +395,19 @@ class User implements UserInterface
      * @ORM\PreUpdate
      *
      * @return $this
+     * @throws Exception
      */
     public function setUpdated()
     {
-        $this->updated = new \DateTime();
+        $this->updated = new DateTime();
 
         return $this;
     }
 
     /**
-     * @return \DateTime
+     * @return DateTime
      */
-    public function getDeleted(): \DateTime
+    public function getDeleted(): DateTime
     {
         return $this->deleted;
     }
@@ -411,9 +415,9 @@ class User implements UserInterface
     /**
      * @ORM\PreRemove
      *
-     * @param \DateTime $deleted
+     * @param DateTime $deleted
      */
-    public function setDeleted(\DateTime $deleted): void
+    public function setDeleted(DateTime $deleted): void
     {
         $this->deleted = $deleted;
     }

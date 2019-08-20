@@ -16,6 +16,7 @@ class HomeIndexFrontend extends GuestFrontend
     /**
      * @Route(RoutePath::FRONTEND_HOME_INDEX, name=RouteName::FRONTEND_HOME_INDEX)
      *
+     * @param Request $request
      * @return Response
      */
     public function index(Request $request)
