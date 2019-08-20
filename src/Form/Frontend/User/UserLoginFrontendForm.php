@@ -2,16 +2,16 @@
 
 namespace Cottect\Form\Frontend\User;
 
-use Cottect\Http\Request\Frontend\User\UserLoginFrontendRequest;
 use Cottect\Utils\RouteName;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\PasswordType;
-use Symfony\Component\Form\Extension\Core\Type\TextType;
-use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Routing\RouterInterface;
+use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Translation\TranslatorInterface;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\PasswordType;
+use Cottect\Http\Request\Frontend\User\UserLoginFrontendRequest;
 
 class UserLoginFrontendForm extends AbstractType
 {
@@ -28,7 +28,7 @@ class UserLoginFrontendForm extends AbstractType
 
     /**
      * @param FormBuilderInterface $builder
-     * @param array $options
+     * @param array                $options
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
@@ -39,7 +39,7 @@ class UserLoginFrontendForm extends AbstractType
                 [
                     'label' => false,
                     'attr' => [
-                        'placeholder' => self::LABEL_TRANSLATOR_ID . UserLoginFrontendRequest::USERNAME_FIELD,
+                        'placeholder' => self::LABEL_TRANSLATOR_ID.UserLoginFrontendRequest::USERNAME_FIELD,
                     ],
                 ]
             )
@@ -49,7 +49,7 @@ class UserLoginFrontendForm extends AbstractType
                 [
                     'label' => false,
                     'attr' => [
-                        'placeholder' => self::LABEL_TRANSLATOR_ID . UserLoginFrontendRequest::PASSWORD_FIELD,
+                        'placeholder' => self::LABEL_TRANSLATOR_ID.UserLoginFrontendRequest::PASSWORD_FIELD,
                     ],
                 ]
             )
@@ -61,7 +61,7 @@ class UserLoginFrontendForm extends AbstractType
     {
         $resolver->setDefaults(
             [
-                'data_class' => UserLoginFrontendRequest::class
+                'data_class' => UserLoginFrontendRequest::class,
             ]
         );
     }

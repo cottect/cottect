@@ -1,18 +1,12 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: dinhnhatbang
- * Date: 8/25/18
- * Time: 3:17 PM
- */
 
 namespace Cottect\Form\Frontend\User;
 
 use Cottect\Utils\RouteName;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\RouterInterface;
+use Symfony\Component\Form\FormBuilderInterface;
 
 class UserLogoutFrontendForm extends AbstractType
 {

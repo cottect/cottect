@@ -1,10 +1,4 @@
 <?php
-/**
- * Created by PhpStorm.
- * User: dinhnhatbang
- * Date: 5/7/18
- * Time: 10:29 PM
- */
 
 namespace Cottect\Http\Request\Frontend\User;
 

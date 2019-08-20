@@ -2,20 +2,20 @@
 
 namespace Cottect\Form\Frontend\User;
 
-use Cottect\Entity\User;
-use Cottect\Http\Request\Frontend\User\UserRegisterFrontendRequest;
 use Cottect\Utils\Date;
+use Cottect\Entity\User;
 use Cottect\Utils\RouteName;
 use Symfony\Component\Form\AbstractType;
-use Symfony\Component\Form\Extension\Core\Type\BirthdayType;
-use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
-use Symfony\Component\Form\Extension\Core\Type\PasswordType;
-use Symfony\Component\Form\Extension\Core\Type\TextType;
-use Symfony\Component\Form\FormBuilderInterface;
 use Symfony\Component\HttpFoundation\Request;
-use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Routing\RouterInterface;
+use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\OptionsResolver\OptionsResolver;
 use Symfony\Component\Translation\TranslatorInterface;
+use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\ChoiceType;
+use Symfony\Component\Form\Extension\Core\Type\BirthdayType;
+use Symfony\Component\Form\Extension\Core\Type\PasswordType;
+use Cottect\Http\Request\Frontend\User\UserRegisterFrontendRequest;
 
 class UserRegisterFrontendForm extends AbstractType
 {
@@ -32,7 +32,7 @@ class UserRegisterFrontendForm extends AbstractType
 
     /**
      * @param FormBuilderInterface $builder
-     * @param array $options
+     * @param array                $options
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
@@ -43,7 +43,7 @@ class UserRegisterFrontendForm extends AbstractType
                 [
                     'label' => false,
                     'attr' => [
-                        'placeholder' => self::LABEL_TRANSLATOR_ID . UserRegisterFrontendRequest::FIRST_NAME_FIELD,
+                        'placeholder' => self::LABEL_TRANSLATOR_ID.UserRegisterFrontendRequest::FIRST_NAME_FIELD,
                     ],
                 ]
             )
@@ -53,7 +53,7 @@ class UserRegisterFrontendForm extends AbstractType
                 [
                     'label' => false,
                     'attr' => [
-                        'placeholder' => self::LABEL_TRANSLATOR_ID . UserRegisterFrontendRequest::LAST_NAME_FIELD,
+                        'placeholder' => self::LABEL_TRANSLATOR_ID.UserRegisterFrontendRequest::LAST_NAME_FIELD,
                     ],
                 ]
             )
@@ -63,7 +63,7 @@ class UserRegisterFrontendForm extends AbstractType
                 [
                     'label' => false,
                     'attr' => [
-                        'placeholder' => self::LABEL_TRANSLATOR_ID . UserRegisterFrontendRequest::USERNAME_FIELD,
+                        'placeholder' => self::LABEL_TRANSLATOR_ID.UserRegisterFrontendRequest::USERNAME_FIELD,
                     ],
                 ]
             )
@@ -72,13 +72,13 @@ class UserRegisterFrontendForm extends AbstractType
                 BirthdayType::class,
                 [
                     'placeholder' => [
-                        'year' => self::LABEL_TRANSLATOR_ID . 'year',
-                        'month' => self::LABEL_TRANSLATOR_ID . 'month',
-                        'day' => self::LABEL_TRANSLATOR_ID . 'day',
+                        'year' => self::LABEL_TRANSLATOR_ID.'year',
+                        'month' => self::LABEL_TRANSLATOR_ID.'month',
+                        'day' => self::LABEL_TRANSLATOR_ID.'day',
                     ],
-                    'label_format' => self::LABEL_TRANSLATOR_ID . "%name%",
+                    'label_format' => self::LABEL_TRANSLATOR_ID.'%name%',
                     'format' => 'yyyyMMdd',
-                    'years' => Date::yearChoiceOverTwelveYear()
+                    'years' => Date::yearChoiceOverTwelveYear(),
                 ]
             )
             ->add(
@@ -87,7 +87,7 @@ class UserRegisterFrontendForm extends AbstractType
                 [
                     'label' => false,
                     'attr' => [
-                        'placeholder' => self::LABEL_TRANSLATOR_ID . UserRegisterFrontendRequest::PASSWORD_FIELD,
+                        'placeholder' => self::LABEL_TRANSLATOR_ID.UserRegisterFrontendRequest::PASSWORD_FIELD,
                     ],
                 ]
             )
@@ -96,8 +96,8 @@ class UserRegisterFrontendForm extends AbstractType
                 ChoiceType::class,
                 [
                     'choices' => [
-                        self::LABEL_TRANSLATOR_ID . 'male' => User::MALE,
-                        self::LABEL_TRANSLATOR_ID . 'female' => User::FEMALE,
+                        self::LABEL_TRANSLATOR_ID.'male' => User::MALE,
+                        self::LABEL_TRANSLATOR_ID.'female' => User::FEMALE,
                     ],
                     'expanded' => true,
                     'multiple' => false,
@@ -115,7 +115,7 @@ class UserRegisterFrontendForm extends AbstractType
     {
         $resolver->setDefaults(
             [
-                'data_class' => UserRegisterFrontendRequest::class
+                'data_class' => UserRegisterFrontendRequest::class,
             ]
         );
     }

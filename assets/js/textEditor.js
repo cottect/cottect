@@ -22,7 +22,6 @@ let editor = new MediumEditor('.editable', {
 });
 
 $('#btn-upload-header-image').click(function () {
-
     $("#image-header-input").click();
 });
 
